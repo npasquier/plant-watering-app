@@ -58,8 +58,6 @@ const userSchema = new Schema<UserProps>(
   {
     _id: {
       type: Schema.ObjectId,
-      required: true,
-      unique: true,
     },
     name: {
       type: String,

@@ -1,4 +1,4 @@
-import ChangeCity from "@/components/ChangeCity";
+import ChangeCity from "@/components/garden/ChangeCity";
 import { UserModel } from "@/models/user";
 
 export default async function page(searchParams:any) {

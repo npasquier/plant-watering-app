@@ -56,7 +56,7 @@ const handler = NextAuth({
 
       if (!userExists) {
           await UserModel.create({
-            _id : new ObjectId(),
+            // _id : new ObjectId(),
             email: profile.email,
             name: profile.name.replace(" ", "").toLowerCase(),
             image : profile.picture,
