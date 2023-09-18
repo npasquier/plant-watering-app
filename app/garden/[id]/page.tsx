@@ -8,13 +8,9 @@ import { UserModel } from "@/models/user";
 import connectToDB from "@/utils/database";
 
 export default async function page(searchParams: any) {
-
   connectToDB();
 
-  
   const user = await UserModel.findById(searchParams.params.id);
-
-  console.log(user?.city);
 
   const city = user?.city || "";
 
@@ -61,10 +57,9 @@ export default async function page(searchParams: any) {
               picture turns blue whenever daily precipitations reach this level.
             </p>
             <p>
-              Set the city where your plants are situated and start the weekly management of their watering levels. Click on 
-              <button
-                className="bg-blue-800 text-white rounded-full mx-2 h-6 w-20 mt-auto"
-              >
+              Set the city where your plants are situated and start the weekly
+              management of their watering levels. Click on
+              <button className="bg-blue-800 text-white rounded-full mx-2 h-6 w-20 mt-auto">
                 <p className="text-sm font-sans">water </p>
               </button>
               button to record a watering activity.
@@ -78,6 +73,7 @@ export default async function page(searchParams: any) {
             <p>Get to know the weather in your city this week </p>
           </div>
           <UserWeather
+            isExample={false}
             city={city}
             weatherData={weatherData}
             naturalWateringThreshold={naturalWateringThreshold}
@@ -120,7 +116,7 @@ export default async function page(searchParams: any) {
             theme="light"
           />
 
-          <UserGarden naturalWatering={naturalWatering} />
+          <UserGarden isExample={false} naturalWatering={naturalWatering} />
         </div>
       </section>
     </main>

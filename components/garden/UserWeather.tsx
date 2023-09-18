@@ -8,10 +8,12 @@ import Link from "next/link";
 export const UserWeather = ({
   city,
   weatherData,
+  isExample, 
   naturalWateringThreshold,
 }: {
   city: string;
   weatherData: any;
+  isExample: boolean;
   naturalWateringThreshold: number;
 }) => {
   const { data: session, status } = useSession();
@@ -29,11 +31,17 @@ export const UserWeather = ({
 
   console.log(status)
 
-  if (status == "authenticated") {
+  if (status == "authenticated" || isExample) {
     return (
       <>
         <div className="mt-8 w-full items-center flex-wrap gap-5">
           <strong>Current city: </strong> 
+
+         {
+          isExample ? (<span className=" hover:text-blue-600 text-blue-800 font-bold pb-1 px-1">
+          {city === "" ? "Set city" : city}{" "}
+        </span>)
+        :
           <Link
             href={`/garden/${session?.user?.id}/setCity`}
           >
@@ -41,6 +49,8 @@ export const UserWeather = ({
               {city === "" ? "Set city" : city}{" "}
             </button>
           </Link>
+}
+
           {/* <UserCity /> */}
         </div>
 

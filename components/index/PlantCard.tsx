@@ -11,6 +11,7 @@ import { fadeIn } from "@/utils/motion";
 
 
 interface Props {
+  isExample: boolean
   plantId: number,
   common_name: string;
   watering?: string;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const PlantCard = ({
+  isExample,
   plantId,
   common_name,
   watering,
@@ -32,9 +34,9 @@ const PlantCard = ({
     <Tilt>
       <motion.div variants = {fadeIn("right", "spring", 0.5, 0.75)}>
     <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md  group rounded-3xl shadow-md">
-      {session?.user && (
+      {session?.user || isExample ? (
       <AddButton plantId= {plantId}  common_name = {common_name}  watering={watering} scienceName={scienceName} pictureLink={pictureLink}/>
-      )}
+      ) : ""}
 
       <div className="relative place-self-center h-48 w-48 my-1 object-contain">
         <Image
@@ -53,7 +55,7 @@ const PlantCard = ({
       </div>
       <p className="flex mt-2 text-[32px] font-extrabold">
         <span className="self-start text-[14px] font-semibold text-gray-500 italic">
-          {scienceName} ; id: {plantId}
+          {scienceName}
         </span>
       </p>
       <p className="flex mt-2 text-[32px] font-extrabold">

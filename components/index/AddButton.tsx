@@ -22,11 +22,14 @@ const AddButton = ({
 }: Props) => {
   const { data: session } = useSession();
 
+  let userId= '64fc8eca3bf7c273bf305bf2';
 
-  const id = session?.user?.id;
+  if (session?.user?.id) {
+    const userId = session?.user?.id
+  } 
 
   async function handlePost() {
-    fetch(`/api/garden/${id}`, {
+    fetch(`/api/garden/${userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -4,9 +4,30 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const SignInButton = () => {
   const { data: session } = useSession();
+
+  const [isExample, setExample] = useState(false);
+
+  const [moveToGarden, setMove] =useState(false);
+
+  const router = useRouter();
+
+
+  function handleExample() {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    searchParams.set("sim", true.toString());
+
+    const newPathname = `${
+      window.location.pathname
+    }?${searchParams.toString()}`;
+
+    router.push(newPathname, { scroll: false });
+    router.refresh();
+  }
 
   // const router = useRouter();
 
@@ -24,7 +45,7 @@ const SignInButton = () => {
           href={`/garden/${session?.user?.id}`}
           className=" text-black-900 my-auto font-semibold hover:text-gray-400"
         >
-          Garden
+          My Garden
         </Link>
         <p className="text-green-900 my-auto font-semibold">
           {session.user.name}
@@ -47,32 +68,48 @@ const SignInButton = () => {
   }
 
   return (
-    < div className="flex gap-4">
-      <button>
+    <div className="flex gap-4">
+      {(!isExample || moveToGarden) && (
+        <button
+          onClick={() => {
+            handleExample();
+            setExample(true);
+            alert(
+              "✅ You can now add plants to your -- simulated -- garden, and access it!"
+            );
+            setMove(false);
+          }}
+          className="mr-3 inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
+        >
+          Simulation
+        </button>
+      )}
+
+      {(isExample && !moveToGarden) && (
         <Link
           href={`/example`}
-          className="inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
+          className="mr-3 inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
         >
-          Garden-example
+          <button onClick={() => setMove(true)}>
+          Garden
+          </button>
         </Link>
-      </button>
-      
-     
+      )}
+
       <button
-      onClick={() => signIn()}
-      className="inline custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
-    >
-      Sign In{" "}
-      <Image
-        height={30}
-        width={30}
-        src="/google.svg"
-        alt="google image"
-        className="ml-2"
-      />
-    </button>
-    </ div>
-    
+        onClick={() => signIn()}
+        className="inline custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
+      >
+        Sign In{" "}
+        <Image
+          height={30}
+          width={30}
+          src="/google.svg"
+          alt="google image"
+          className="ml-2"
+        />
+      </button>
+    </div>
   );
 };
 

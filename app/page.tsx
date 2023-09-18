@@ -16,6 +16,12 @@ export default async function Home({ searchParams, session }: any) {
     maxCards: searchParams.nb || "8",
   });
 
+  let isExample = false; 
+
+  if (searchParams.sim === "true") {
+     isExample = true ;
+  } 
+
   const isDataEmpty =
     !Array.isArray(allPlants) || allPlants.length < 1 || !allPlants;
 
@@ -188,6 +194,7 @@ export default async function Home({ searchParams, session }: any) {
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-1 w-full gap-8 pt-14">
               {allPlants?.map((plant) => (
                 <PlantCard
+                 isExample={isExample}
                   key={plant.id}
                   plantId={plant.id}
                   common_name={plant.common_name}

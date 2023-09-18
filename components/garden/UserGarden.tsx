@@ -5,17 +5,22 @@ import PlantCardGarden from "./PlantCardGarden";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const UserGarden = ({naturalWatering}: {naturalWatering: number}) => {
+const UserGarden = ({naturalWatering, isExample}: {naturalWatering: number, isExample: boolean}) => {
 
   const { data: session, status } = useSession();
 
   const [data, setData] = useState([]);
   const [isChanged, setChanged] = useState(true);
 
+   let userId= '64fc8eca3bf7c273bf305bf2';
+
+  if (session?.user?.id) {
+    const userId = session?.user?.id
+  } 
  
   useEffect(() => {
 
-  fetch("/api/garden/" + session?.user?.id, { method: "GET" })
+  fetch("/api/garden/" + userId, { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setData(data.userPlants);
@@ -25,7 +30,7 @@ const UserGarden = ({naturalWatering}: {naturalWatering: number}) => {
   }, [isChanged, status]);
 
   function handleDelete(plantId: any, common_name: any) {
-    fetch("/api/garden/" + session?.user?.id + "/" + plantId, {
+    fetch("/api/garden/" + userId + "/" + plantId, {
       method: "DELETE",
     }).then((res) => {
       toast.error(`${common_name} successfully deleted!`, {
@@ -44,7 +49,7 @@ const UserGarden = ({naturalWatering}: {naturalWatering: number}) => {
   }
 
   function handleWater(plantId: any, common_name: any) {
-    fetch("/api/garden/" + session?.user?.id + "/" + plantId, {
+    fetch("/api/garden/" + userId + "/" + plantId, {
       method: "PATCH",
     }).then((res) => {
 
@@ -67,7 +72,7 @@ const UserGarden = ({naturalWatering}: {naturalWatering: number}) => {
 
   return (
     <>
-      {status === "authenticated" ? (
+      {status === "authenticated" || isExample ? (
         data?.length > 0 ? (
           <section>
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-1 w-full gap-8 pt-14">

@@ -65,7 +65,7 @@ const PlantCardGarden = ({
       </div>
       <p className="flex mt-2 text-[32px] font-extrabold">
         <span className="self-start text-[14px] font-semibold text-gray-500 italic">
-          {scienceName} ; id {plantId}
+          {scienceName} 
         </span>
       </p>
       <p className="flex mt-2 text-[32px] font-extrabold">
