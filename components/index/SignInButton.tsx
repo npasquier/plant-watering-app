@@ -47,9 +47,20 @@ const SignInButton = () => {
   }
 
   return (
-    <button
+    < div className="flex gap-4">
+      <button>
+        <Link
+          href={`/example`}
+          className="inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
+        >
+          Example
+        </Link>
+      </button>
+      
+     
+      <button
       onClick={() => signIn()}
-      className="custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
+      className="inline custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
     >
       Sign In{" "}
       <Image
@@ -60,6 +71,8 @@ const SignInButton = () => {
         className="ml-2"
       />
     </button>
+    </ div>
+    
   );
 };
 
