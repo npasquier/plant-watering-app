@@ -3,6 +3,7 @@
 import React from "react";
 import CustomButton from "./CustomButton";
 import Image from "next/image";
+import PlantCanva from "./canvas/PlantCanvas";
 
 const Hero = () => {
   const handleScrollCatalogue = () => {
@@ -46,7 +47,7 @@ const Hero = () => {
 
       <div className="xl:flex-[1.5] flex justify-end items-end w-full xl:h-screen relative">
         <div className="relative  w-[90%] xl:h-[50%] h-[0%] z-0 my-auto">
-          <Image
+          {/* <Image
             src="/hero.jpeg"
             alt="hero"
             width="0"
@@ -54,7 +55,8 @@ const Hero = () => {
             sizes="100vw"
             className="w-full h-auto overview-hidden  rounded-full shadow-xl bg-orange-50"
             priority
-          />
+          /> */}
+            <PlantCanva />
         </div>
         {/* <div className="absolute h-20 start-0 top-0 mt-[100px] ml-[400px] overflow-hidden ">
           <Image
