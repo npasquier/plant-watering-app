@@ -37,20 +37,20 @@ const Plant = () => {
               />
       <spotLight intensity={0.5} position={[90,100,50]}  castShadow/>
       <primitive object={heroPlant.scene} 
-      scale={4} 
-      position={[0, 1, 0]} />
+       scale={1} 
+       position={[0, 0.3, 0]} />
     </mesh>
   );
 };
 
 const PlantCanva = () => {
-  const [dpr, setDpr] = useState(2)
+  const [dpr, setDpr] = useState(0.9)
 
   return (
     <Canvas
       // frameloop="demand"
       shadows
-      camera={{ position: [0, 0, 15], fov: 11 }}
+      camera={{ position: [0, 0, 15], fov: 2.9 }}
       dpr={dpr}
       gl={{ preserveDrawingBuffer: true }}
     >
@@ -61,8 +61,8 @@ const PlantCanva = () => {
           minPolarAngle={Math.PI / 2}
         />
         <PerformanceMonitor 
-        onDecline={() => setDpr(1.5)}
-        onIncline={() => setDpr(2)}
+        onDecline={() => setDpr(0.8)}
+        onIncline={() => setDpr(1)}
       >
         <Plant />
       </PerformanceMonitor>
