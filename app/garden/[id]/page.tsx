@@ -5,8 +5,13 @@ import Image from "next/image";
 import { UserWeather } from "@/components/garden/UserWeather";
 import { fetchUserWeather } from "@/utils/weather";
 import { UserModel } from "@/models/user";
+import connectToDB from "@/utils/database";
 
 export default async function page(searchParams: any) {
+
+  connectToDB();
+
+  
   const user = await UserModel.findById(searchParams.params.id);
 
   console.log(user?.city);

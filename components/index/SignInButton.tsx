@@ -53,7 +53,7 @@ const SignInButton = () => {
           href={`/example`}
           className="inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
         >
-          Example
+          Garden-example
         </Link>
       </button>
       
