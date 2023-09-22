@@ -72,7 +72,6 @@ const SignInButton = () => {
       {(!isExample || moveToGarden) && (
         <button
           onClick={() => {
-            handleExample();
             setExample(true);
             alert(
               "✅ You can now add plants to your -- simulated -- garden, and access it!"
@@ -80,14 +79,18 @@ const SignInButton = () => {
             setMove(false);
           }}
           className="mr-3 inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
-        >
+        ><Link
+        href={`?sim=true`}
+        className=" text-black-900 my-auto font-semibold hover:text-gray-400"
+      >
           Simulation
+          </Link>
         </button>
       )}
 
       {(isExample && !moveToGarden) && (
         <Link
-          href={`/example`}
+          href={`/example?sim=true`}
           className="mr-3 inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
         >
           <button onClick={() => setMove(true)}>
