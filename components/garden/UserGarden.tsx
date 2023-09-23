@@ -12,11 +12,8 @@ const UserGarden = ({naturalWatering, isExample}: {naturalWatering: number, isEx
   const [data, setData] = useState([]);
   const [isChanged, setChanged] = useState(true);
 
-   let userId= '64fc8eca3bf7c273bf305bf2';
+  const userId = session?.user?.id.toString() ? session?.user?.id.toString() : "64fc8eca3bf7c273bf305bf2"
 
-  if (session?.user?.id) {
-    const userId = session?.user?.id
-  } 
  
   useEffect(() => {
 
@@ -27,7 +24,10 @@ const UserGarden = ({naturalWatering, isExample}: {naturalWatering: number, isEx
       })
       setChanged(false);
     
-  }, [isChanged, status]);
+  }, [isChanged, status, userId]);
+
+
+
 
   function handleDelete(plantId: any, common_name: any) {
     fetch("/api/garden/" + userId + "/" + plantId, {

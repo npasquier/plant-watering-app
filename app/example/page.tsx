@@ -38,11 +38,11 @@ async function page() {
   
   return (
     <main className="overflow-hidden">
-      <div className="w-screen mt-48 mb-32 ">
-        <h1 className="font-extrabold  text-center text-3xl">Example</h1>
+      <div className="w-screen mt-48  ">
+        <h1 className="font-extrabold  text-center text-3xl">Simulated Garden</h1>
       
 
-      <div className="mt-40  padding-x padding-y max-width ">
+      <div className="mt-32  padding-x padding-y max-width ">
         <div className=" mx-30 p-6 bg-gray-50 text-gray-700  font-sans rounded-md shadow-xl ">
           <p className="font-semibold">
             You need to give your lawn a good soak -- 1-inch of water -- once
@@ -66,7 +66,7 @@ async function page() {
             <button
               className="bg-blue-800 text-white rounded-full mx-2 h-6 w-20 mt-auto"
             >
-              <p className="text-sm font-sans">water </p>
+              <p className="text-sm font-sans text-white">water </p>
             </button>
             button to record a watering activity.
           </p>
@@ -122,7 +122,7 @@ async function page() {
           theme="light"
         />
 
-        <UserGarden isExample={true} naturalWatering={naturalWatering} />
+        <UserGarden isExample={true} naturalWatering={naturalWatering}/>
       </div>
       </div>
     </main>

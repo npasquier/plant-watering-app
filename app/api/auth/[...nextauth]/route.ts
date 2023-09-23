@@ -3,6 +3,7 @@ import {UserModel} from "@/models/user";
 import GoogleProvider from "next-auth/providers/google";
 import  connectToDB  from "@/utils/database";
 import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
 
 
 
@@ -67,8 +68,6 @@ const handler = NextAuth({
           });
       }
       
-
-
       return true;
 
     } catch (error : any) {

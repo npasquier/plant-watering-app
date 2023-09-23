@@ -15,39 +15,35 @@ const SignInButton = () => {
 
   const router = useRouter();
 
+  useEffect ( () => {
 
-  function handleExample() {
-    const searchParams = new URLSearchParams(window.location.search);
+    if(session?.user?.id) {
+      router.refresh();
+    }
 
-    searchParams.set("sim", true.toString());
-
-    const newPathname = `${
-      window.location.pathname
-    }?${searchParams.toString()}`;
-
-    router.push(newPathname, { scroll: false });
-    router.refresh();
   }
+  , [session?.user?.id, isExample])
 
-  // const router = useRouter();
 
-  // function handleGarden() {
-  //   router.replace("/garden/" + session?.user?.id);
-  // }
 
-  // const accessToken = session?.accessToken;
-  // console.log(accessToken);
 
   if (session?.user) {
     return (
+      
       <div className="flex gap-4 ml-auto">
+        <Link
+          href={`/catalogue/${session?.user?.id}`}
+          className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+        >
+          Catalogue
+        </Link>
         <Link
           href={`/garden/${session?.user?.id}`}
           className=" text-black-900 my-auto font-semibold hover:text-gray-400"
         >
           My Garden
         </Link>
-        <p className="text-green-900 my-auto font-semibold">
+        <p className="text-green-600 my-auto font-semibold">
           {session.user.name}
         </p>
         <Image
@@ -69,38 +65,67 @@ const SignInButton = () => {
 
   return (
     <div className="flex gap-4">
-      {(!isExample || moveToGarden) && (
+      {(!isExample ) && (
+        <>
+        <Link
+        href={`/catalogue`}
+        className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+      >
+        Catalogue
+      </Link>
         <button
           onClick={() => {
             setExample(true);
             alert(
               "✅ You can now add plants to your -- simulated -- garden, and access it!"
             );
-            setMove(false);
+            router.refresh();
           }}
-          className="mr-3 inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
+          className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
         ><Link
         href={`?sim=true`}
-        className=" text-black-900 my-auto font-semibold hover:text-gray-400"
+        className="my-auto text-white font-semibold  "
       >
-          Simulation
+          Try
           </Link>
         </button>
+        </>
       )}
 
       {(isExample && !moveToGarden) && (
+        <>
+        <button
+          onClick={() => {
+            setExample(false);
+            router.refresh();
+          }}
+          className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
+        ><Link
+        href={`/`}
+        className="my-auto text-white font-semibold  "
+      >
+          Exit
+          </Link>
+        </button>
+        <Link
+        href={`/catalogue?sim=true`}
+        className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+      >
+        Catalogue
+      </Link>
         <Link
           href={`/example?sim=true`}
-          className="mr-3 inline text-black-900 my-auto ml-auto font-semibold hover:text-gray-400"
+          className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
         >
-          <button onClick={() => setMove(true)}>
+          
           Garden
-          </button>
+         
         </Link>
+        </>
       )}
 
       <button
-        onClick={() => signIn()}
+        onClick={() => signIn() }
         className="inline custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
       >
         Sign In{" "}

@@ -8,6 +8,7 @@ import { UserModel } from "@/models/user";
 import connectToDB from "@/utils/database";
 
 export default async function page(searchParams: any) {
+
   connectToDB();
 
   const user = await UserModel.findById(searchParams.params.id);
@@ -60,7 +61,7 @@ export default async function page(searchParams: any) {
               Set the city where your plants are situated and start the weekly
               management of their watering levels. Click on
               <button className="bg-blue-800 text-white rounded-full mx-2 h-6 w-20 mt-auto">
-                <p className="text-sm font-sans">water </p>
+                <p className="text-sm font-sans text-white">water </p>
               </button>
               button to record a watering activity.
             </p>

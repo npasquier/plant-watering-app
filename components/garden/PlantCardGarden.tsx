@@ -92,7 +92,7 @@ const PlantCardGarden = ({
             setLvl(lvl + 1);
           }}
         >
-          <p className="text-sm font-sans">water </p>
+          <p className="text-sm font-sans text-white">water </p>
         </button>
       </div>
       <div className="flex flex-row justify-center gap-3 relative h-10 w-40 mt-5 mx-auto object-contain">

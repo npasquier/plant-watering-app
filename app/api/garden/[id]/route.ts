@@ -42,6 +42,8 @@ export async function POST(request: NextRequest, { params }: any) {
 
   await connectToDB();
 
+  console.log(params);
+
   const id = params.id;
 
   const plantExist = await PlantModel.findOne({ id: data.plantId });
