@@ -49,6 +49,15 @@ body {
 	top: 20%;
 }
 
+@media (max-width: 768px) {
+  .gooey-rec {
+  height: 300px;
+  width: 340px;
+  left: 5%;
+  top: 5%
+  }
+}
+
 @keyframes transform
 {
     0%,

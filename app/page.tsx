@@ -8,71 +8,93 @@ import InfoGifLeft from "@/components/index/InfoGifLeft";
 export default async function Home() {
   return (
     <main className="overflow-hidden">
-      <Hero />
+      <div className="relative lg:mb-0 mb-80">
+        <Hero />
+      </div>
 
-      <InfoGifLeft>
-        <>
-          <p className="my-3">
-            <span className="mr-1">🚨</span> <strong> Watering </strong> your
-            lawn for a couple of minutes <strong> every evening </strong> can
-            have a <strong>detrimental effect</strong> .
-          </p>
+      <div className="relative">
+        <InfoGifLeft>
+          <div className="flex flex-row">
+            <img src="./water-evening.jpeg" className="flex-1 w-[300px] rounded-br-full" />
+            <div className="flex flex-col my-auto ml-16">
+              <p className="my-3 text-2xl">
+                 <strong> Watering </strong>{" "}
+                your lawn for a couple of minutes{" "}
+                <strong> every evening </strong> can have a{" "}
+                <strong>detrimental effect</strong>.
+              </p>
 
-          <p className="my-3 ml-10 text-gray-700">
-            -&gt; A small dose of water will not penetrate the soil and will
-            stay in the top few millimeters of soil. The roots will not go down
-            to look for the water, causing the grass to become weak and shallow
-            rooted. This weak grass will be more{" "}
-            <em>susceptible to weeds and wear.</em>
-          </p>
-        </>
-      </InfoGifLeft>
+              <p className="my-3 mt-6 text-lg ">
+              A small dose of water will not penetrate the soil and will
+                stay in the top few millimeters of soil. The roots will not go
+                down to look for the water, causing the grass to become weak and
+                shallow rooted. This weak grass will be more{" "}
+                <em>susceptible to weeds and wear.</em>
+              </p>
+            </div>
+          </div>
+        </InfoGifLeft>
 
-      <InfoGifRight>
-        <>
-          <p className="font-bold">
-            <span className="mr-1">✅</span> You need to give your lawn a good
-            soak -- 1-inch of water -- once or twice a week.
-          </p>
-          <p className="mt-3 ml-10 text-gray-700">
-            -&gt; A good soak once or twice a week will saturate the soil and
-            encourage the roots to go down looking for moisture. Deeper roots
-            mean a <em>tougher healthier plant</em>!
-          </p>
-          <p className="mt-3">
-            <span className="mr-1">💧</span> 1-inch of water{" "}
-            <strong>&#8773; 25 mm of precipitations</strong>. Outdoor plants are
-            thus sometimes naturally sufficiently hydrated through the weather.
-          </p>
-        </>
-      </InfoGifRight>
+        <InfoGifRight>
+          <>
+          <div className="flex flex-row">
+            <div className="flex-1 flex-col my-auto -mr-28">
+              <p className="my-3 text-2xl">
+              You need to give your lawn <strong> a good
+              soak </strong>-- 1-inch of water -- <strong>once or twice a week</strong>.
+              </p>
 
-      <InfoGifLeft>
-        <>
-          <p className="my-3">
-            <span className="mr-1">👉</span> This web app gives a quick and easy
-            way to{" "}
-            <strong>manage the watering activity of your outdoor plants</strong>{" "}
-            given the
-            <strong> weekly weather</strong>.
-          </p>
-          <p className="mt-3 ml-10 text-gray-700">
-            -&gt;
-            <strong className="ml-1">
-              <SignInTextBtn />
-            </strong>{" "}
-            to discover its full potential: compose your own garden, access
-            weekly weather precipitations, and keep track of each plant's
-            watering level.
-          </p>
-          <p className="ml-14 text-gray-500 text-sm">
-            {" "}
-            Signing In with Google is secure:{" "}
-            <u>Google does not share your password</u>. Your password remains a
-            secret for everyone except to Google.{" "}
-          </p>
-        </>
-      </InfoGifLeft>
+              <p className="my-8 text-lg">
+              A good soak once or twice a week will saturate the soil and
+              encourage the roots to go down looking for moisture. Deeper roots
+              mean a <em>tougher healthier plant</em>!
+            </p>
+            <p className="my-3 text-lg">
+               1-inch of water 
+              <strong>&#8773; 25 mm of precipitations</strong>. Outdoor plants
+              are thus sometimes naturally sufficiently hydrated through the
+              weather.
+            </p>
+            </div>
+            <img src="./transpi.png" className="flex-1.5 w-[600px] -mr-32 rounded-b-full" />
+
+          </div>
+          </>
+        </InfoGifRight>
+
+        <InfoGifLeft>
+          <>
+          <div className="flex flex-row">
+            <img src="./web-app.png" className="flex-1 w-[400px] rounded-tr-3xl" />
+            <div className="flex flex-col my-auto ml-16">
+              <p className="my-3 text-2xl">
+              This web app gives a quick and
+              easy way to{" "}
+              <strong>
+                manage the watering activity of your outdoor plants
+              </strong>{" "}
+              given the
+              <strong> weekly weather</strong>.
+              </p>
+
+              <p className="my-3 mt-6 text-lg ">
+              <strong className="ml-1">
+                <SignInTextBtn />
+              </strong>{" "}
+              to discover its full potential: compose your own garden, access
+              weekly weather precipitations, and keep track of each plant's
+              watering level.
+              </p>
+              <p className="my-3 mt-6 text-lg ">
+              Signing In with Google is secure:{" "}
+              <u>Google does not share your password</u>. Your password remains
+              a secret for everyone except to Google.{" "}
+              </p>
+            </div>
+          </div>
+          </>
+        </InfoGifLeft>
+      </div>
     </main>
   );
 }

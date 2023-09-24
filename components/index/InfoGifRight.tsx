@@ -18,9 +18,9 @@ const InfoGifRight = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <div ref={ref} className="mt-12 padding-x padding-y max-width">
-      <div className=" mx-30 p-6 bg-gray-50 text-gray-700  font-sans rounded-md shadow-xl ">
-        <p className="my-3"></p>
+    <div ref={ref} className="mt-0 padding-x padding-y max-width">
+      <div className=" mx-30 p-6  font-sans  ">
+        <p className="my-0"></p>
         {children}
       </div>
     </div>
