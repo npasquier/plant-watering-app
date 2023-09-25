@@ -100,7 +100,8 @@ body {
 }
 
 .gif-right {
-  animation: fadeslideRight 12s; /* Chrome, Firefox 16+, IE 10+, Opera */
+  animation-delay: 1s;
+  animation: fadeslideRight 16s; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
 @keyframes fadeslideRight {
@@ -116,7 +117,8 @@ body {
 }
 
 .gif-left {
-  animation: fadeslideLeft 12s; /* Chrome, Firefox 16+, IE 10+, Opera */
+  animation-delay: 1s;
+  animation: fadeslideLeft 16s; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
 @keyframes fadeslideLeft {

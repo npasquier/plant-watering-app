@@ -15,7 +15,7 @@ export default async function Home() {
       <div className="relative">
         <InfoGifLeft>
           <div className="flex flex-row">
-            <img src="./water-evening.jpeg" className="flex-1 w-[300px] rounded-br-full" />
+            <img src="./water-evening.jpeg" className="flex-1 w-[300px] h-[450px] rounded-br-full" />
             <div className="flex flex-col my-auto ml-16">
               <p className="my-3 text-2xl">
                  <strong> Watering </strong>{" "}
@@ -38,7 +38,7 @@ export default async function Home() {
         <InfoGifRight>
           <>
           <div className="flex flex-row">
-            <div className="flex-1 flex-col my-auto -mr-28">
+            <div className="flex-1 flex-col my-auto ">
               <p className="my-3 text-2xl">
               You need to give your lawn <strong> a good
               soak once or twice a week</strong>.
@@ -52,7 +52,7 @@ export default async function Home() {
               The weather thus sometimes sufficiently hydrates the outdoor plants. 
             </p>
             </div>
-            <img src="./transpi.png" className="flex-1.5 w-[600px] -mr-32 rounded-b-full" />
+            <img src="./transpi.png" className="flex-1.5 w-[350px] border-solid border-green-800 border-2 rounded-full bg-gray-100 bg-opacity-50" />
 
           </div>
           </>
