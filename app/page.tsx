@@ -41,19 +41,15 @@ export default async function Home() {
             <div className="flex-1 flex-col my-auto -mr-28">
               <p className="my-3 text-2xl">
               You need to give your lawn <strong> a good
-              soak </strong>-- 1-inch of water -- <strong>once or twice a week</strong>.
+              soak once or twice a week</strong>.
               </p>
 
               <p className="my-8 text-lg">
-              A good soak once or twice a week will saturate the soil and
+              A good soak will saturate the soil and
               encourage the roots to go down looking for moisture. Deeper roots
-              mean a <em>tougher healthier plant</em>!
-            </p>
-            <p className="my-3 text-lg">
-               1-inch of water 
-              <strong>&#8773; 25 mm of precipitations</strong>. Outdoor plants
-              are thus sometimes naturally sufficiently hydrated through the
-              weather.
+              mean a <strong>tougher healthier plant</strong>!
+            
+              The weather thus sometimes sufficiently hydrates the outdoor plants. 
             </p>
             </div>
             <img src="./transpi.png" className="flex-1.5 w-[600px] -mr-32 rounded-b-full" />
@@ -78,7 +74,7 @@ export default async function Home() {
               </p>
 
               <p className="my-3 mt-6 text-lg ">
-              <strong className="ml-1">
+              <strong >
                 <SignInTextBtn />
               </strong>{" "}
               to discover its full potential: compose your own garden, access
