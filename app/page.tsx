@@ -12,7 +12,7 @@ export default async function Home() {
         <Hero />
       </div>
 
-      <div className="relative">
+      <div className="relative mt-3">
         <InfoGifLeft>
           <div className="flex flex-row">
             <img src="./water-evening.jpeg" className="flex-1 w-[300px] h-[450px] rounded-br-full" />
