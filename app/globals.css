@@ -44,17 +44,17 @@ body {
 		transform 20s ease-in-out infinite both alternate,
 		movement_one 40s ease-in-out infinite both;
 	opacity: 1;
-	position: absolute;
+	position: relative;
 	left: 10%;
 	top: 20%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .gooey-rec {
   height: 300px;
   width: 340px;
-  left: 5%;
-  top: 5%
+  left: 10%;
+  top: 40%
   }
 }
 
