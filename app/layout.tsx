@@ -16,19 +16,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    
     <html lang="en">
       <head>
         <link rel="icon" href="/logo.svg" sizes="any" />
       </head>
       <body className="relative">
-        <Providers>
-          <Navbar />
-          <Animate>{children}</Animate>
-          <Footer />
-        </Providers> 
+        <Animate>
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer />
+          </Providers>
+        </Animate>
       </body>
     </html>
-   
   );
 }
