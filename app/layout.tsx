@@ -21,13 +21,11 @@ export default function RootLayout({
         <link rel="icon" href="/logo.svg" sizes="any" />
       </head>
       <body className="relative">
-        <Animate>
-          <Providers>
-            <Navbar />
-            {children}
-            <Footer />
-          </Providers>
-        </Animate>
+        <Providers>
+          <Navbar />
+          <Animate>{children}</Animate>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
