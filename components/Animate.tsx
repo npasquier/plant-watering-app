@@ -7,8 +7,6 @@ import { usePathname } from "next/navigation";
 const Animate = ({ children }: { children: ReactNode }) => {
   const pathName = usePathname();
 
-  console.log(pathName);
-
   return (
     <AnimatePresence initial={false}>
       <motion.div
