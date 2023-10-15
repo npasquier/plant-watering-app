@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { fetchPlants } from "@/utils";
 import MorePlantsBtn from "@/components/catalogue/MorePlantsBtn";
-import Animate from "@/components/Animate";
 
 export default async function Home({ searchParams, session }: any) {
   const allPlants = await fetchPlants({

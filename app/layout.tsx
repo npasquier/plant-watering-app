@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "@/components/Providers";
-import { AnimatePresence } from "framer-motion";
 import Animate from "@/components/Animate";
 
 export const metadata: Metadata = {

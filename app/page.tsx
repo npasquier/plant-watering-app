@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import SignInTextBtn from "@/components/index/SignInTextBtn";
 import InfoGifRight from "@/components/index/InfoGifRight";
 import InfoGifLeft from "@/components/index/InfoGifLeft";
-import Animate from "@/components/Animate";
 
 export default async function Home() {
   return (
