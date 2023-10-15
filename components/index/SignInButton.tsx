@@ -34,12 +34,14 @@ const SignInButton = () => {
         <Link
           href={`/catalogue/${session?.user?.id}`}
           className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+          scroll={false}
         >
           Catalogue
         </Link>
         <Link
           href={`/garden/${session?.user?.id}`}
           className=" text-black-900 my-auto font-semibold hover:text-gray-400"
+          scroll={false}
         >
           My Garden
         </Link>
@@ -70,6 +72,7 @@ const SignInButton = () => {
         <Link
         href={`/catalogue`}
         className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+        scroll={false}
       >
         Catalogue
       </Link>
@@ -85,6 +88,7 @@ const SignInButton = () => {
         ><Link
         href={`?sim=true`}
         className="my-auto text-white font-semibold  "
+        scroll={false}
       >
           Try
           </Link>
@@ -103,6 +107,7 @@ const SignInButton = () => {
         ><Link
         href={`/`}
         className="my-auto text-white font-semibold  "
+        scroll={false}
       >
           Exit
           </Link>
@@ -110,12 +115,14 @@ const SignInButton = () => {
         <Link
         href={`/catalogue?sim=true`}
         className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+        scroll={false}
       >
         Catalogue
       </Link>
         <Link
           href={`/example?sim=true`}
           className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+          scroll={false}
         >
           
           Garden

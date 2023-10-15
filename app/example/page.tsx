@@ -6,6 +6,7 @@ import { fetchUserWeather } from "@/utils/weather";
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import Image from "next/image";
+import Animate from "@/components/Animate";
 
 async function page() {
 
