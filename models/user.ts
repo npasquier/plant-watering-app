@@ -2,11 +2,19 @@ import mongoose, { Document, Schema, Types, model } from "mongoose";
 
 // Subdocument definition
 
+interface WaterProps {
+  precip: number;
+  manualWater: boolean;
+  shouldWater: boolean;
+}
+
 interface PlantProps {
   id: number;
   common_name: string;
-  watering: string;
-  manualWateringLvl?: number;
+  wateringRequested: string;
+  totalWateringLvl?: number;
+  pastWaterActivity: Types.DocumentArray<WaterProps>;
+  currentWaterActivity: Types.DocumentArray<WaterProps>;
   pictureLink?: string;
   scienceName?: string;
 }
@@ -28,6 +36,18 @@ interface UserProps extends Document {
 
 // Subdocument Schema
 
+const waterSchema = new Schema<WaterProps>({
+  precip: {
+    type: Number,
+  },
+  manualWater: {
+    type: Boolean,
+  },
+  shouldWater: {
+    type: Boolean,
+  },
+});
+
 const plantSchema = new Schema<PlantProps>({
   id: {
     type: Number,
@@ -37,11 +57,17 @@ const plantSchema = new Schema<PlantProps>({
     type: String,
     required: true,
   },
-  watering: {
+  wateringRequested: {
     type: String,
     required: true,
   },
-  manualWateringLvl: {
+  pastWaterActivity: {
+    type: [waterSchema],
+  },
+  currentWaterActivity: {
+    type: [waterSchema],
+  },
+  totalWateringLvl: {
     type: Number,
   },
   pictureLink: {

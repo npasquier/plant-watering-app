@@ -26,8 +26,10 @@ export async function PATCH(request: NextRequest, { params }: any) {
   console.log("PATCHING DATA...");
 
   const { id, plant } = params;
+  const data = await request.json();
 
-  console.log(id, plant)
+
+  console.log(id, plant, data.dayIndex)
 
 
   const user = await UserModel.findOne({ _id: id });
@@ -36,12 +38,18 @@ export async function PATCH(request: NextRequest, { params }: any) {
     return elem.id == plant;
   });
 
+  console.log(userPlant);
+
   userPlant?.filter((elem) => {
-    if (elem && typeof elem.manualWateringLvl == "number" ) {
-      elem.manualWateringLvl++;
-      return elem.manualWateringLvl;
+
+    elem.currentWaterActivity[data.dayIndex].manualWater = !elem.currentWaterActivity[data.dayIndex].manualWater;
+
+    elem.currentWaterActivity[data.dayIndex].shouldWater = false;
+
     }
-  });
+    );
+
+  
 
   user?.save();
   console.log("Plant is updated");

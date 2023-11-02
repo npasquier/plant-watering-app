@@ -5,29 +5,33 @@ import PlantCardGarden from "./PlantCardGarden";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const UserGarden = ({naturalWatering, isExample}: {naturalWatering: number, isExample: boolean}) => {
-
+const UserGarden = ({
+  naturalWatering,
+  isExample,
+}: {
+  naturalWatering: number;
+  isExample: boolean;
+}) => {
   const { data: session, status } = useSession();
 
   const [data, setData] = useState([]);
   const [isChanged, setChanged] = useState(true);
 
-  const userId = session?.user?.id.toString() ? session?.user?.id.toString() : "64fc8eca3bf7c273bf305bf2"
+  const userId = session?.user?.id.toString()
+    ? session?.user?.id.toString()
+    : "6541480c6632d9ff072c5327";
 
- 
   useEffect(() => {
+    fetch("/api/watering/", { method: "GET" });
 
-  fetch("/api/garden/" + userId, { method: "GET" })
+    fetch("/api/garden/" + userId, { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setData(data.userPlants);
-      })
-      setChanged(false);
-    
+      });
+
+    setChanged(false);
   }, [isChanged, status, userId]);
-
-
-
 
   function handleDelete(plantId: any, common_name: any) {
     fetch("/api/garden/" + userId + "/" + plantId, {
@@ -48,11 +52,18 @@ const UserGarden = ({naturalWatering, isExample}: {naturalWatering: number, isEx
     });
   }
 
-  function handleWater(plantId: any, common_name: any) {
+  function handleWater(plantId: any, common_name: any, index: number) {
     fetch("/api/garden/" + userId + "/" + plantId, {
       method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        plantId: plantId,
+        common_name: common_name,
+        dayIndex: index,
+      }),
     }).then((res) => {
-
       toast.info(`${common_name} successfully watered!`, {
         position: "top-right",
         autoClose: 4000,
@@ -66,22 +77,25 @@ const UserGarden = ({naturalWatering, isExample}: {naturalWatering: number, isEx
       });
       setChanged(true);
     });
-  
   }
- 
 
   return (
     <>
       {status === "authenticated" || isExample ? (
         data?.length > 0 ? (
           <section>
-            <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-1 w-full gap-8 pt-14">
+            <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-1 w-full gap-8 pt-3">
               {data?.map((plant: any) => (
                 <PlantCardGarden
                   key={plant.id}
                   plantId={plant.id}
                   common_name={plant.common_name}
-                  watering={plant.watering ? plant.watering : "unknown"}
+                  wateringRequested={
+                    plant.wateringRequested
+                      ? plant.wateringRequested
+                      : "unknown"
+                  }
+                  currentWaterActivity={plant?.currentWaterActivity}
                   manualWateringLvl={plant?.manualWateringLvl}
                   pictureLink={plant.pictureLink || "/picture-fail.png"}
                   scienceName={plant.scienceName}

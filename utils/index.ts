@@ -35,10 +35,10 @@ export async function fetchYesterdayWeather({ city }: { city: string }): Promise
 
 export function mapWatering(word : string) {
   if(word==="Frequent") {
-    return {text :"twice per week", number : 2}
+    return {text :"2x/week", number : 2}
   }
   if(word==="Average") {
-    return {text : "once a week", number : 1}
+    return {text : "1x/week", number : 1}
   }
   if(word==="Frequent") {
     return {text : "once every 1.5-2 weeks", number : 0 }

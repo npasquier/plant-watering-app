@@ -3,6 +3,12 @@ import { getWeekNumber } from "@/utils";
 import connectToDB from "@/utils/database";
 import { NextRequest, NextResponse } from "next/server";
 
+
+/*
+// GET 
+*/
+
+
 export async function GET(request: NextRequest, { params }: any) {
   await connectToDB();
 
@@ -19,7 +25,7 @@ export async function GET(request: NextRequest, { params }: any) {
 
     if (user?.weekLog === 0 || (user?.weekLog && weekNumber > user?.weekLog)) {
       user?.garden?.forEach((plant) => {
-        plant.manualWateringLvl = 0;
+        plant.totalWateringLvl = 0;
       });
 
       user.weekLog = weekNumber;
@@ -36,6 +42,11 @@ export async function GET(request: NextRequest, { params }: any) {
     return NextResponse.json([""]);
   }
 }
+
+
+/*
+// POST 
+*/
 
 export async function POST(request: NextRequest, { params }: any) {
   const data = await request.json();
@@ -54,13 +65,21 @@ export async function POST(request: NextRequest, { params }: any) {
     user?.garden?.filter((plant) => plant.id === data.plantId).length === 0 &&
     plantExist === null
   ) {
-
     user?.garden?.push({
       id: data.plantId,
       common_name: data.common_name,
       pictureLink: data.pictureLink,
-      watering: data.watering,
-      manualWateringLvl: data.manualWateringLvl,
+      currentWaterActivity: [
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+      ],
+      wateringRequested: data.wateringRequested,
+      totalWateringLvl: data.totalWateringLvl,
       scienceName: data.scienceName[0],
     });
     user?.save();
@@ -80,8 +99,17 @@ export async function POST(request: NextRequest, { params }: any) {
       id: data.plantId,
       common_name: data.common_name,
       pictureLink: data.pictureLink,
-      watering: data.watering,
-      manualWateringLvl: data.manualWateringLvl,
+      currentWaterActivity: [
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+        { precip: -1, manualWater: false, shouldWater: false },
+      ],
+      wateringRequested: data.wateringRequested,
+      totalWateringLvl: data.totalWateringLvl,
       scienceName: data.scienceName[0],
     });
     user?.save();
@@ -103,3 +131,44 @@ export async function POST(request: NextRequest, { params }: any) {
     );
   }
 }
+
+
+/*
+// PATCH 
+*/
+
+// export async function PATCH({ params }: any) {
+//   await connectToDB();
+
+//   console.log("PATCHING DATA...");
+
+//   const { id } = params;
+
+
+//   console.log(id)
+
+
+//   const user = await UserModel.findOne({ _id: id });
+
+//   // const userPlant = user?.garden?.filter((elem) => {
+//   //   return elem.id == plant;
+//   // });
+
+//   // console.log(userPlant);
+
+//   // userPlant?.filter((elem) => {
+
+//   //   elem.currentWaterActivity[data.dayIndex].manualWater = !elem.currentWaterActivity[data.dayIndex].manualWater;
+
+//   //   elem.currentWaterActivity[data.dayIndex].shouldWater = false;
+
+//   //   }
+//   //   );
+
+  
+
+//   user?.save();
+//   console.log("Plant is updated");
+
+//   return NextResponse.json({ message: "Plant Removed" }, { status: 201 });
+// }

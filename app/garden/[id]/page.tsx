@@ -6,9 +6,9 @@ import { UserWeather } from "@/components/garden/UserWeather";
 import { fetchUserWeather } from "@/utils/weather";
 import { UserModel } from "@/models/user";
 import connectToDB from "@/utils/database";
+import Chat from "@/components/chat/Chat";
 
 export default async function page(searchParams: any) {
-
   connectToDB();
 
   const user = await UserModel.findById(searchParams.params.id);
@@ -37,10 +37,18 @@ export default async function page(searchParams: any) {
 
   return (
     <main className="overflow-hidden">
+      <Chat />
       <section className="my-20">
-        <div className="mt-40  padding-x padding-y max-width ">
-          <div className=" mx-30 p-6 bg-gray-50 text-gray-700  font-sans rounded-md shadow-xl ">
-            <p className="font-semibold">
+        <div className="flex flex-row gap-2 mt-32  padding-x padding-y max-width ">
+          <Image
+            src="/gardener.svg"
+            width={80}
+            height={80}
+            priority
+            alt="Picture of gardener AI"
+          />
+          <div className="bubble-wide mx-30 p-6 bg-gray-50 text-gray-700  font-sans rounded-3xl shadow-xl  bubble-bottom-left">
+            {/* <p className="font-semibold">
               You need to give your lawn a good soak -- 1-inch of water -- once
               or twice a week.
             </p>
@@ -64,32 +72,31 @@ export default async function page(searchParams: any) {
                 <p className="text-sm font-sans text-white">water </p>
               </button>
               button to record a watering activity.
+            </p> */}
+            <p className="font-semibold">
+              Hi visitor! I'm Lily --  your AI gardener support for this web application. 
             </p>
+
+            <p className="my-1">I will remind you every day which plant to water.</p>
           </div>
         </div>
 
-        <div className="mt-12 padding-x padding-y max-width" id="weather">
-          <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
-            <h1 className="text-4xl font-extrabold">Weather of the week</h1>
-            <p>Get to know the weather in your city this week </p>
-          </div>
-          <UserWeather
-            isExample={false}
-            city={city}
-            weatherData={weatherData}
-            naturalWateringThreshold={naturalWateringThreshold}
-          />
-        </div>
+      
 
         <div
-          className="flex flex-row mt-10 padding-x padding-y max-width"
+          className="flex flex-row mt-0 padding-x padding-y max-width"
           id="myGarden"
         >
           <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-auto">
             <h1 className="flex flex-item text-4xl font-extrabold">
               My Garden
             </h1>
-            <p>Explore the plants in your garden and water them</p>
+            <p className="my-2">You need to give your lawn a good soak -- 1-inch of water -- once or twice a week.</p>
+            <ul className="list-disc ml-20 mt-3">
+              <li>Span the plants you own</li>
+              <li>Check their watering requirement and levels</li>
+              <li>Water them if necessary</li>
+            </ul>
           </div>
           <div className="flex flex-item ml-auto xl:mr-20 md:mr-20">
             <Image
@@ -118,6 +125,19 @@ export default async function page(searchParams: any) {
           />
 
           <UserGarden isExample={false} naturalWatering={naturalWatering} />
+        </div>
+
+        <div className="mt-32 padding-x padding-y max-width" id="weather">
+          <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
+            <h1 className="text-4xl font-extrabold">Weather of the week</h1>
+            <p>Get to know the weather in your city this week </p>
+          </div>
+          <UserWeather
+            isExample={false}
+            city={city}
+            weatherData={weatherData}
+            naturalWateringThreshold={naturalWateringThreshold}
+          />
         </div>
       </section>
     </main>

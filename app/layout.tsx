@@ -26,7 +26,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <QueryProvider>
-          <Chat />
+
           <Animate>{children}</Animate>
           <Footer />
           </QueryProvider>

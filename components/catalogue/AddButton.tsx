@@ -22,7 +22,7 @@ const AddButton = ({
 }: Props) => {
   const { data: session } = useSession();
 
-  const userId = session?.user?.id.toString() ? session?.user?.id.toString() : "64fc8eca3bf7c273bf305bf2"
+  const userId = session?.user?.id.toString() ? session?.user?.id.toString() : "6541480c6632d9ff072c5327"
 
 
   async function handlePost() {
@@ -34,7 +34,7 @@ const AddButton = ({
       body: JSON.stringify({
         plantId: plantId,
         common_name: common_name,
-        watering: watering,
+        wateringRequested: watering,
         manualWateringLvl: 0,
         pictureLink: pictureLink,
         scienceName: scienceName,

@@ -69,28 +69,19 @@ const SignInButton = () => {
     <div className="flex gap-4">
       {(!isExample ) && (
         <>
-        <Link
-        href={`/catalogue`}
-        className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
-        scroll={false}
-      >
-        Catalogue
-      </Link>
+       
         <button
           onClick={() => {
             setExample(true);
-            alert(
-              "✅ You can now add plants to your -- simulated -- garden, and access it!"
-            );
             router.refresh();
           }}
           className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
         ><Link
-        href={`?sim=true`}
+        href={`/guide?sim=true`}
         className="my-auto text-white font-semibold  "
         scroll={false}
       >
-          Try
+          Explore
           </Link>
         </button>
         </>
@@ -105,20 +96,14 @@ const SignInButton = () => {
           }}
           className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
         ><Link
-        href={`/`}
+        href={`/ `}
         className="my-auto text-white font-semibold  "
         scroll={false}
       >
           Exit
           </Link>
         </button>
-        <Link
-        href={`/catalogue?sim=true`}
-        className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
-        scroll={false}
-      >
-        Catalogue
-      </Link>
+       
         <Link
           href={`/example?sim=true`}
           className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"

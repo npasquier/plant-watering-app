@@ -11,7 +11,7 @@ const Hero = () => {
           Water your garden on time!
         </h1>
         <p className="xl:text-[27px] text-[22px] font-light mt-5 font-darkGreen-color gif-delayed">
-          Follow your garden watering level given the weekly weather.
+          Optimize the watering level of your garden given the weekly weather.
         </p>
       </div>
 

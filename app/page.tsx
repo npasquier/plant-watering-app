@@ -14,7 +14,7 @@ export default async function Home() {
           <InfoGifLeft>
             <div className="flex flex-row flex-wrap lg:mt-0 mt-8 relative">
               <div className="lg:w-[250px] lg:h-[350px] rounded-b-full overflow-hidden relative">
-                <img src="./water-evening.jpeg" />
+                <img src="/water-evening.jpeg" />
               </div>
               <div className="lg:my-auto  lg:w-[70%] w-[100%] lg:ml-12 ml-8 mt-8 relative">
                 <p className="my-3 text-2xl">
@@ -53,7 +53,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <img
-                    src="./transpi.png"
+                    src="/transpi.png"
                     className="lg:w-[300px] sm:w-[200px] mx-auto border-solid border-green-800 border-2 rounded-full bg-gray-100 bg-opacity-50"
                   />
                 </div>
@@ -65,7 +65,7 @@ export default async function Home() {
             <>
               <div className="flex flex-row flex-wrap">
                 <div className="w-[400px] ">
-                  <img src="./web-app.png" />
+                  <img src="/web-app.png" />
                 </div>
 
                 <div className="lg:flex-[1.5] flex flex-col my-auto ml-8">

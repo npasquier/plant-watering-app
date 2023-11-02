@@ -37,7 +37,7 @@ const SearchPlantCommonName = ({
         <div className="relative w-full pr-4">
           <Combobox.Button className="absolute top-[14px]">
             <Image
-              src="plant-logo.svg"
+              src="/plant-logo.svg"
               alt="Plant logo"
               width={20}
               height={20}

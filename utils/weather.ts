@@ -10,52 +10,52 @@ export async function fetchUserWeather({
   city: string;
   userId: any;
 }) {
+  // Set up Dates for API
   const today = new Date();
   const todayDay = (today.getDay() + 6) % 7;
 
-  const days = <any[]>[];
+  const previousDays = <any[]>[];
 
   for (let i = 1; i <= todayDay; i++) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
     const dateISO = date.toISOString().split("T")[0];
     const dateDay = (date.getDay() + 6) % 7;
-    days.push({ number: dateDay, ISO: dateISO });
+    previousDays.push({ number: dateDay, ISO: dateISO });
   }
 
-  await connectToDB();
-
-  const user = await UserModel.findById(userId);
-
-  const userWeather = user?.weather;
-
+  // Set-up API Key for API
   const APIkeyWeather = process.env.API_KEY_WEATHERAPI;
 
-  var setUp = 0;
+  // Connect to DB and access the weather data of the user
+  await connectToDB();
+  const user = await UserModel.findById(userId);
+  const userWeather = user?.weather;
 
-  if (todayDay === 0 && setUp === 0) {
+  // Clean up on Monday
+  if (todayDay === 0 && userWeather) {
     for (let i = 1; i < 7; i++) {
-      user?.weather.pop();
-      setUp++;
+      userWeather.pop();
     }
   }
 
-  days.forEach((day) => {
+  // Fetch weather history
+  previousDays.forEach((previousDay) => {
     if (
-      userWeather.filter((item: any) => {
-        return item.day == day.number;
+      userWeather.filter((weatherDayItem: any) => {
+        return weatherDayItem.day == previousDay.number;
       }).length === 0
     ) {
       console.log("Query history...");
 
       fetch(
-        `http://api.weatherapi.com/v1/history.json?key=${APIkeyWeather}&q=${city}&dt=${day.ISO}`,
+        `http://api.weatherapi.com/v1/history.json?key=${APIkeyWeather}&q=${city}&dt=${previousDay.ISO}`,
         { cache: "no-cache" }
       )
         .then((res) => res.json())
         .then((result) => {
           const dailyData = {
-            day: day.number,
+            day: previousDay.number,
             desc: result.forecast.forecastday[0].day.condition.text,
             precip: result.forecast.forecastday[0].day.totalprecip_mm,
             temp: result.forecast.forecastday[0].day.avgtemp_c,
@@ -68,10 +68,10 @@ export async function fetchUserWeather({
     }
   });
 
-  const futureDAys = Math.min(7 - todayDay, 3);
+  const futureDays = Math.min(7 - todayDay, 3);
 
   await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=${APIkeyWeather}&q=${city}&days=${futureDAys}`,
+    `http://api.weatherapi.com/v1/forecast.json?key=${APIkeyWeather}&q=${city}&days=${futureDays}`,
     { cache: "no-cache" }
   )
     .then((res) => res.json())
