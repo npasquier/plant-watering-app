@@ -26,9 +26,8 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <QueryProvider>
-
-          <Animate>{children}</Animate>
-          <Footer />
+            <Animate>{children}</Animate>
+            <Footer />
           </QueryProvider>
         </Providers>
       </body>

@@ -80,6 +80,7 @@ const SignInButton = () => {
         href={`/guide?sim=true`}
         className="my-auto text-white font-semibold  "
         scroll={false}
+        shallow={true}
       >
           Explore
           </Link>
@@ -99,6 +100,7 @@ const SignInButton = () => {
         href={`/ `}
         className="my-auto text-white font-semibold  "
         scroll={false}
+        shallow={true}
       >
           Exit
           </Link>
@@ -108,6 +110,7 @@ const SignInButton = () => {
           href={`/example?sim=true`}
           className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
           scroll={false}
+          shallow={true}
         >
           
           Garden
