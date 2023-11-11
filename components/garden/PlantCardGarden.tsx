@@ -5,6 +5,8 @@ import Image from "next/image";
 import { fadeIn } from "@/utils/motion";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
+import { useState } from "react";
+import PlantDetails from "../catalogue/PlantDetails";
 
 interface DayProps {
   precip: number;
@@ -39,6 +41,7 @@ const PlantCardGarden = ({
   // Sunday - Saturday : 0 - 6
   const todayISO = (today.getUTCDay() + 6) % 7;
 
+  const [isOpen, setIsOpen] = useState(false);
 
   const weekDays = [
     "Monday",
@@ -55,12 +58,30 @@ const PlantCardGarden = ({
       <motion.div variants={fadeIn("right", "spring", 0.5, 0.75)}>
         <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md  group rounded-3xl shadow-md">
           <div className="w-full flex justify-between items-start gap-2">
+          <div className="flex w-full">
+            <button
+              className="relative w-10 h-10 z-10 text-white rounded-full  invisible group-hover:visible"
+              onClick={() => setIsOpen(true)}
+            >
+              <div className="bg-slate-200 opacity-90 rounded-full mx-auto text-gray-800 text-xl ">
+                ℹ
+              </div>
+              <PlantDetails
+                isOpen={isOpen}
+                closeModal={() => {
+                  setIsOpen(false);
+                }}
+                plantPictureLink={pictureLink}
+                plantId={plantId}
+              />
+            </button>
             <button
               className="bg-red-700 text-white rounded-full ml-auto h-6 w-6"
               onClick={() => onDelete(plantId, common_name)}
             >
               -
             </button>
+            </div>
           </div>
 
           <div className="relative place-self-center h-48 w-48 my-1 object-contain">

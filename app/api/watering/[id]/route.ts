@@ -112,10 +112,11 @@ export async function PUT(request: NextRequest) {
           totalWatering === 0 &&
           mapWatering(plant.wateringRequested).number === 2
         ) {
+          
           for (let i = 0; i < 7; i++) {
             plant.currentWaterActivity[i].shouldWater = false;
           }
-          
+
           plant.currentWaterActivity[todayISO].shouldWater = true;
 
           const shouldWaterDay = todayISO + 3;

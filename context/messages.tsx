@@ -24,7 +24,7 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: nanoid(),
-      text: "Hi! I am Lily, your AI gardener support. How can I help you today? 😊",
+      text: `I am sorry, I can't discuss today. The developper of this web app has no more chatGPT credits... Another time 😊 `,
       isUserMessage: false,
     },
   ]);

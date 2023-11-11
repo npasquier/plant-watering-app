@@ -5,9 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { fetchPlants } from "@/utils";
 import MorePlantsBtn from "@/components/catalogue/MorePlantsBtn";
-import AnimationWatering from "@/components/lottie/AnimationWatering";
 
-export default async function Home({ searchParams, session }: any) {
+export default async function Home({ searchParams }: any) {
   const allPlants = await fetchPlants({
     plantCommonName: searchParams.q || "",
     maxCards: searchParams.nb || "8",
@@ -69,6 +68,7 @@ export default async function Home({ searchParams, session }: any) {
                       key={plant.id}
                       plantId={plant.id}
                       common_name={plant.common_name}
+                      scienceName={plant.scientific_name}
                       watering={
                         plant.watering && plant.id < 3000
                           ? plant.watering
@@ -78,8 +78,7 @@ export default async function Home({ searchParams, session }: any) {
                         plant.default_image?.small_url && plant.id < 3000
                           ? plant.default_image?.small_url
                           : "/picture-fail.png"
-                      }
-                      scienceName={plant.scientific_name}
+                      }                      
                     />
                   )
               )}
