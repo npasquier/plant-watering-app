@@ -2,8 +2,6 @@
 
 import { mapWatering } from "@/utils";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { types } from "util";
 import { fadeIn } from "@/utils/motion";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
@@ -13,7 +11,8 @@ interface DayProps {
   manualWater: boolean;
   shouldWater: boolean;
 }
-interface Props {
+
+interface CardProps {
   plantId: number;
   common_name: string;
   wateringRequested?: string;
@@ -21,7 +20,6 @@ interface Props {
   currentWaterActivity: [DayProps];
   pictureLink?: any;
   scienceName?: string;
-  naturalWatering: number;
   onDelete: any;
   onWater: any;
 }
@@ -30,21 +28,17 @@ const PlantCardGarden = ({
   plantId,
   common_name,
   wateringRequested,
-  manualWateringLvl,
   currentWaterActivity,
   pictureLink,
   scienceName,
-  naturalWatering,
   onDelete,
   onWater,
-}: Props) => {
-  const baseLvl = naturalWatering + manualWateringLvl;
+}: CardProps) => {
 
   const today = new Date();
   // Sunday - Saturday : 0 - 6
   const todayISO = (today.getUTCDay() + 6) % 7;
 
-  const [lvl, setLvl] = useState(baseLvl);
 
   const weekDays = [
     "Monday",
@@ -98,25 +92,7 @@ const PlantCardGarden = ({
               {mapWatering(wateringRequested || "").text}
             </span>
           </p>
-          {/* <div className="w-full flex justify-between items-start gap-2">
-        <p className="flex mt-2 text-[32px] font-extrabold">
-          <span className="self-start text-[14px] font-semibold">
-            Watering Lvl: &nbsp;{" "}
-          </span>
-          <span className="self-end text-[14px] font-semibold text-blue-800">
-            {lvl <= mapWatering(watering || "").number ? lvl : "Stooop!"}
-          </span>
-        </p>
-        <button
-          className="bg-blue-800 text-white rounded-full ml-3 mr-auto h-6 w-20 mt-auto"
-          onClick={() => {
-            onWater(plantId, common_name);
-            setLvl(lvl + 1);
-          }}
-        >
-          <p className="text-sm font-sans text-white">water </p>
-        </button>
-      </div> */}
+
           <div className="flex flex-row justify-center gap-1 relative h-8 w-56 mt-5 mx-auto object-contain">
             {/* <p className="-ml-4 my-auto">Week: </p> */}
             {currentWaterActivity.map((day, index) => (
@@ -150,19 +126,6 @@ const PlantCardGarden = ({
               </button>
             ))}
 
-            {/*         
-        {mapWatering(watering || "").number > 1 && (
-          <div className="flex relative h-10 w-10">
-            <Image
-              src={lvl > 1 ? `/water.svg` : `/noWater.svg`}
-              alt="Drop of Water Picture"
-              fill
-              sizes="100%"
-              priority
-              className="object-contain border p-1 rounded-full bg-white"
-            />
-          </div>
-        )} */}
           </div>
         </div>
       </motion.div>

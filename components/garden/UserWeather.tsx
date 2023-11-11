@@ -1,24 +1,23 @@
 "use client";
 
-import React from "react";
+import Link from "next/link";
 import UserWeatherDayCard from "./UserWeatherDayCard";
 import { signIn, useSession } from "next-auth/react";
-import Link from "next/link";
 
 export const UserWeather = ({
-  city,
+  isExample,
   weatherData,
-  isExample, 
+  city,
   naturalWateringThreshold,
 }: {
-  city: string;
-  weatherData: any;
   isExample: boolean;
+  weatherData: Object[];
+  city: string;
   naturalWateringThreshold: number;
 }) => {
+  
   const { data: session, status } = useSession();
 
-  //map dailyData with weekDay before parsing the data into the Cards.
   const weekDays = [
     "Monday",
     "Tuesday",
@@ -29,29 +28,23 @@ export const UserWeather = ({
     "Sunday",
   ];
 
-  console.log(status)
-
   if (status == "authenticated" || isExample) {
     return (
       <>
         <div className="mt-8 w-full items-center flex-wrap gap-5">
-          <strong>Current city: </strong> 
+          <strong>Current city: </strong>
 
-         {
-          isExample ? (<span className=" hover:text-blue-600 text-blue-800 font-bold pb-1 px-1">
-          {city === "" ? "Set city" : city}{" "}
-        </span>)
-        :
-          <Link
-            href={`/garden/${session?.user?.id}/setCity`}
-          >
-            <button className=" hover:text-blue-600 text-blue-800 font-bold pb-1 px-1">
+          {isExample ? (
+            <span className=" hover:text-blue-600 text-blue-800 font-bold pb-1 px-1">
               {city === "" ? "Set city" : city}{" "}
-            </button>
-          </Link>
-}
-
-          {/* <UserCity /> */}
+            </span>
+          ) : (
+            <Link href={`/garden/${session?.user?.id}/setCity`}>
+              <button className=" hover:text-blue-600 text-blue-800 font-bold pb-1 px-1">
+                {city === "" ? "Set city" : city}{" "}
+              </button>
+            </Link>
+          )}
         </div>
 
         <div className="grid 2xl:grid-cols-7 xl:grid-cols-7 md:grid-cols-5 grid-cols-2 sm:grid-cols-2 w-full gap-2 pt-5">
@@ -69,16 +62,11 @@ export const UserWeather = ({
             />
           ))}
         </div>
-
-        
       </>
     );
-  } 
-  else if (status == "loading") {
+  } else if (status == "loading") {
     return <h2>Loading....</h2>;
-
-  }
-  else {
-    signIn()
+  } else {
+    signIn();
   }
 };

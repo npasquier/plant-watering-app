@@ -13,8 +13,7 @@ export async function GET() {
         users.forEach(async (user) => {
           if (user.city) {
             const weeklyWeather = await fetchUserWeather({
-              city: user.city,
-              userId: user._id,
+              userId: user._id.toString(),
             });
             user.save();
             console.log("... should be okay now", user.city, weeklyWeather);

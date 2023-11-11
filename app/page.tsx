@@ -1,11 +1,8 @@
 import Hero from "@/components/index/Hero";
-import "react-toastify/dist/ReactToastify.css";
-
-import SignInTextBtn from "@/components/index/SignInTextBtn";
 import InfoGifRight from "@/components/index/InfoGifRight";
 import InfoGifLeft from "@/components/index/InfoGifLeft";
 
-export default async function Home() {
+export default function Home() {
   return (
       <main>
         <Hero />
@@ -75,10 +72,7 @@ export default async function Home() {
                   </p>
 
                   <p className="my-3 mt-6 text-lg ">
-                    <strong>
-                      <SignInTextBtn />*
-                    </strong>{" "}
-                    to discover its full potential:
+                    Sign in to discover its full potential:
                   </p>
                   <ol className="list-decimal ml-8 mt-2 text-lg">
                     <li>Compose your own garden,</li>

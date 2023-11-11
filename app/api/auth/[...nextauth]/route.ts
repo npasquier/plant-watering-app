@@ -3,7 +3,6 @@ import {UserModel} from "@/models/user";
 import GoogleProvider from "next-auth/providers/google";
 import  connectToDB  from "@/utils/database";
 import { ObjectId } from "mongodb";
-import { NextResponse } from "next/server";
 
 
 
@@ -37,7 +36,10 @@ const handler = NextAuth({
 
     session.accessToken = token.accessToken ;
 
+    console.log("Opening session");
+
     return session;
+    
     }
     catch (error : any) {
       console.log("Error opening session: ", error.message);
@@ -49,8 +51,6 @@ const handler = NextAuth({
   async signIn({ profile }: any) {
     try {
       await connectToDB();
-
-      console.log(profile.sub)
 
       const userExists = await UserModel.findOne({email: profile.email });
 

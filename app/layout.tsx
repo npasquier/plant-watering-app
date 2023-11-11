@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import Providers from "@/components/Providers";
-import Animate from "@/components/Animate";
-import Chat from "@/components/chat/Chat";
-import QueryProvider from "@/components/chat/Providers";
+import QueryProvider from "@/components/chat/QueryProvider";
 
 export const metadata: Metadata = {
   title: "Plant watering app",
@@ -26,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <QueryProvider>
-            <Animate>{children}</Animate>
+            {children}
             <Footer />
           </QueryProvider>
         </Providers>

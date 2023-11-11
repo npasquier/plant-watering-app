@@ -1,6 +1,5 @@
 "use client";
 
-import React, { Fragment } from "react";
 import Image from "next/image";
 
 const Hero = () => {
@@ -15,7 +14,7 @@ const Hero = () => {
         </p>
       </div>
 
-      <div className="xl:flex-[1.5]  xl:w-full xl:h-screen relative">
+      <div className="xl:flex-[1.5] xl:w-full xl:h-screen relative">
         <div className="gooey-rec my-auto xl:mr-32">
           <Image
             src="/hero.jpeg"

@@ -1,5 +1,4 @@
-import mongoose, { ConnectOptions } from "mongoose";
-
+import mongoose, { ConnectOptions } from 'mongoose';
 let isConnected = false;
 
 export default async function connectToDB()  {

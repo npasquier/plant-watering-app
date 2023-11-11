@@ -1,17 +1,16 @@
-import SignInTextBtn from "@/components/index/SignInTextBtn";
 import AnimationWatering from "@/components/lottie/AnimationWatering";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      <div className="mt-20 padding-x padding-y max-width h-screen">
+      <div className="mt-20 padding-x padding-y max-width h-screen gif">
         <div className="flex flex-row flex-wrap mt-20">
           <div className="w-[550px] ">
             <AnimationWatering />
           </div>
 
-          <div className="lg:flex-[1.5] flex flex-col my-auto ml-8">
+          <div className="lg:flex-[1.5] flex flex-col my-auto ml-8 ">
             <p className=" my-3 text-2xl">
               <strong>Optimize the watering of your garden</strong> given the
               weekly weather.
@@ -37,10 +36,7 @@ export default function Home() {
               </li>
             </ol>
             <p className="my-3 mt-6  ">
-              <strong>
-                <SignInTextBtn />*
-              </strong>{" "}
-              to access all these features: Sign In with Google is more secure
+              Sign In to access all these features: Sign In with Google is more secure
               than offering you a way to subscribe on this web app because
               Google provides more security over your password.{" "}
             </p>
@@ -54,7 +50,7 @@ export default function Home() {
               className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
               scroll={false}
             >
-             <span className="mx-1">🌿</span> Go to the catalogue
+              <span className="mx-1">🌿</span> Go to the catalogue
             </Link>{" "}
           </button>
         </div>

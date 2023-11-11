@@ -3,15 +3,13 @@ import { getWeekNumber } from "@/utils";
 import connectToDB from "@/utils/database";
 import { NextRequest, NextResponse } from "next/server";
 
-
 /*
 // GET 
 */
 
-
 export async function GET(request: NextRequest, { params }: any) {
-  await connectToDB();
 
+  await connectToDB();
   const userId = params.id;
 
   if (userId !== "undefined") {
@@ -21,28 +19,34 @@ export async function GET(request: NextRequest, { params }: any) {
 
     const userCity = user?.city;
 
+
+    // Reset watering levels upon fecthing on a new week
     const weekNumber = getWeekNumber(new Date());
 
     if (user?.weekLog === 0 || (user?.weekLog && weekNumber > user?.weekLog)) {
+
       user?.garden?.forEach((plant) => {
         plant.totalWateringLvl = 0;
+        plant.currentWaterActivity.forEach(day => day.shouldWater = false);
+        plant.currentWaterActivity.forEach(day => day.manualWater = false);
+        plant.currentWaterActivity.forEach(day => day.precip = -1);
       });
 
       user.weekLog = weekNumber;
 
-      user?.save;
+      user.save();
 
       console.log("Reset watering levels");
-    }
 
-    await user?.save();
+    } else {
+      user?.save();
+    }
 
     return NextResponse.json({ userPlants, userCity });
   } else {
     return NextResponse.json([""]);
   }
 }
-
 
 /*
 // POST 
@@ -131,44 +135,3 @@ export async function POST(request: NextRequest, { params }: any) {
     );
   }
 }
-
-
-/*
-// PATCH 
-*/
-
-// export async function PATCH({ params }: any) {
-//   await connectToDB();
-
-//   console.log("PATCHING DATA...");
-
-//   const { id } = params;
-
-
-//   console.log(id)
-
-
-//   const user = await UserModel.findOne({ _id: id });
-
-//   // const userPlant = user?.garden?.filter((elem) => {
-//   //   return elem.id == plant;
-//   // });
-
-//   // console.log(userPlant);
-
-//   // userPlant?.filter((elem) => {
-
-//   //   elem.currentWaterActivity[data.dayIndex].manualWater = !elem.currentWaterActivity[data.dayIndex].manualWater;
-
-//   //   elem.currentWaterActivity[data.dayIndex].shouldWater = false;
-
-//   //   }
-//   //   );
-
-  
-
-//   user?.save();
-//   console.log("Plant is updated");
-
-//   return NextResponse.json({ message: "Plant Removed" }, { status: 201 });
-// }

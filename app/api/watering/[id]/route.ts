@@ -1,30 +1,34 @@
 import { UserModel } from "@/models/user";
 import { mapWatering } from "@/utils";
 import connectToDB from "@/utils/database";
+import { fetchUserWeather } from "@/utils/weather";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function PUT(request: NextRequest) {
   await connectToDB();
 
-  const users = await UserModel.find({});
+  const data = await request.json();
 
-  
+
+  const userId = data.userId;
+
+  const user = await UserModel.findById( userId );
+
   //Transfer weekly weather by user
-  users.forEach((user) => {
-    if (user.garden) {
-      user.garden.forEach((plant) => {
-        for (let i = 0; i < user.weather.length; i++) {
-          plant.currentWaterActivity[i].precip = user.weather[i].precip;
-        }
-      });
-      console.log("...changed! ");
-    }
-  });
+
+  if (user && user.garden) {
+    user.garden.forEach((plant) => {
+      for (let i = 0; i < user.weather.length; i++) {
+        plant.currentWaterActivity[i].precip = user.weather[i].precip;
+      }
+    });
+    console.log("...changed! ");
+  }
 
   // Update total watering level by user
-  users.forEach((user) => {
-    if (user.garden) {
+
+    if (user && user.garden) {
       user.garden.forEach((plant) => {
         let totalWatering = 0;
 
@@ -121,11 +125,10 @@ export async function GET() {
         }
       });
     }
-  });
 
-  users.forEach((user) => {
-    user.save();
-  });
+  
+    user?.save();
+
 
   return NextResponse.json("Watering activity updated!");
 }

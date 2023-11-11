@@ -29,8 +29,6 @@ export async function PATCH(request: NextRequest, { params }: any) {
   const data = await request.json();
 
 
-  console.log(id, plant, data.dayIndex)
-
 
   const user = await UserModel.findOne({ _id: id });
 

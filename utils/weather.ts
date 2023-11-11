@@ -4,11 +4,9 @@ import { UserModel } from "@/models/user";
 import connectToDB from "./database";
 
 export async function fetchUserWeather({
-  city,
   userId,
 }: {
-  city: string;
-  userId: any;
+  userId: string;
 }) {
   // Set up Dates for API
   const today = new Date();
@@ -31,6 +29,7 @@ export async function fetchUserWeather({
   await connectToDB();
   const user = await UserModel.findById(userId);
   const userWeather = user?.weather;
+  const city = user?.city;
 
   // Clean up on Monday
   if (todayDay === 0 && userWeather) {
@@ -38,6 +37,9 @@ export async function fetchUserWeather({
       userWeather.pop();
     }
   }
+
+  console.log("Start updating weather for userId: ", userId);
+
 
   // Fetch weather history
   previousDays.forEach((previousDay) => {
@@ -99,7 +101,11 @@ export async function fetchUserWeather({
     })
     .catch((error) => console.log("error", error));
 
-  await user?.save();
 
-  return userWeather;
+  user?.save();
+
+  console.log("End of weather update for userId: ", userId);
+
+
+  return {weather: userWeather, city: city};
 }

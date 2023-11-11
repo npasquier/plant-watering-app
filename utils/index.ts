@@ -40,8 +40,11 @@ export function mapWatering(word : string) {
   if(word==="Average") {
     return {text : "1x/week", number : 1}
   }
-  if(word==="Frequent") {
+  if(word=== "Minimum") {
     return {text : "once every 1.5-2 weeks", number : 0 }
+  }
+  if(word=== "None") {
+    return {text : "No need", number : 0 }
   }
   else {
     return {text : "unknown", number : -1 }

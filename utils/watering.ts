@@ -1,45 +1,69 @@
 import { UserModel } from "@/models/user";
-import { mapWatering } from "@/utils";
-import connectToDB from "@/utils/database";
-
+import connectToDB from "./database";
 import { NextResponse } from "next/server";
+import { mapWatering } from ".";
 
-export async function GET() {
+export async function transferWeatherToUserPlants({
+  userId,
+  userWeatherData,
+}: {
+  userId: string;
+  userWeatherData: any;
+}) {
   await connectToDB();
 
-  const users = await UserModel.find({});
+  const user = await UserModel.findById(userId);
 
-  
   //Transfer weekly weather by user
-  users.forEach((user) => {
-    if (user.garden) {
-      user.garden.forEach((plant) => {
-        for (let i = 0; i < user.weather.length; i++) {
-          plant.currentWaterActivity[i].precip = user.weather[i].precip;
-        }
-      });
-      console.log("...changed! ");
-    }
-  });
+
+  if (user && user.garden) {
+    user.garden.forEach((plant) => {
+      for (let i = 0; i < userWeatherData.length; i++) {
+        plant.currentWaterActivity[i].precip = userWeatherData[i].precip;
+      }
+    });
+
+    console.log("Weather transfered to user's plants... ");
+
+    user.save();
+
+    return NextResponse.json({
+      message: "Watering activity updated!",
+      status: 200,
+    });
+  } else {
+    console.log("No user found");
+
+    return NextResponse.json({
+      message: "Something went wrong in transfering weather!",
+      status: 400,
+    });
+  }
+}
+
+export async function updateWateringLevels({ userId }: { userId: string }) {
+  await connectToDB();
+
+  const user = await UserModel.findById(userId);
 
   // Update total watering level by user
-  users.forEach((user) => {
-    if (user.garden) {
-      user.garden.forEach((plant) => {
-        let totalWatering = 0;
 
-        for (let i = 0; i < 7; i++) {
-          plant.currentWaterActivity[i].manualWater &&
-            (totalWatering = totalWatering + 1);
-          plant.currentWaterActivity[i].precip > 25 &&
-            (totalWatering = totalWatering + 1);
-        }
+  if (user && user.garden) {
+    user.garden.forEach((plant) => {
+      let totalWatering = 0;
+
+      for (let i = 0; i < 7; i++) {
+        plant.currentWaterActivity[i].manualWater &&
+          (totalWatering = totalWatering + 1);
+        plant.currentWaterActivity[i].precip > 25 &&
+          (totalWatering = totalWatering + 1);
+      }
 
         const today = new Date();
         // Sunday - Saturday : 0 - 6
         const todayISO = (today.getUTCDay() + 6) % 7;
 
-        // Algo for Water Frequency of 1x/week: update shoudlWater by user
+      //   // Algo for Water Frequency of 1x/week: update shoudlWater by user
         if (
           totalWatering === 0 &&
           mapWatering(plant.wateringRequested).number === 1
@@ -108,6 +132,7 @@ export async function GET() {
           totalWatering === 0 &&
           mapWatering(plant.wateringRequested).number === 2
         ) {
+
           for (let i = 0; i < 7; i++) {
             plant.currentWaterActivity[i].shouldWater = false;
           }
@@ -119,13 +144,16 @@ export async function GET() {
             plant.currentWaterActivity[shouldWaterDay].shouldWater = true;
           }
         }
-      });
-    }
-  });
 
-  users.forEach((user) => {
+
+        
+    });
+
     user.save();
-  });
 
-  return NextResponse.json("Watering activity updated!");
+    return NextResponse.json({ message: "Watering updated!", status: 200 });
+  } else {
+    console.log("No user found");
+    return NextResponse.json({ message: "Watering failed!", status: 400 });
+  }
 }

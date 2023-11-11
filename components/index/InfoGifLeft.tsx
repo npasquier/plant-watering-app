@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect, useRef } from "react";
 
-const InfoGifRight = ({ children }: { children: ReactNode }) => {
+const InfoGifLeft = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLInputElement | null>(null);
 
 
@@ -24,4 +24,4 @@ const InfoGifRight = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default InfoGifRight;
+export default InfoGifLeft;

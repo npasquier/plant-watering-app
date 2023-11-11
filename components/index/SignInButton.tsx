@@ -11,25 +11,18 @@ const SignInButton = () => {
 
   const [isExample, setExample] = useState(false);
 
-  const [moveToGarden, setMove] =useState(false);
+  const [moveToGarden, setMove] = useState(false);
 
   const router = useRouter();
 
-  useEffect ( () => {
-
-    if(session?.user?.id) {
-      router.refresh();
-    }
-
-  }
-  , [session?.user?.id, isExample])
-
-
-
+  // useEffect(() => {
+  //   if (session?.user?.id) {
+  //     router.refresh();
+  //   }
+  // }, [session?.user?.id, isExample]);
 
   if (session?.user) {
     return (
-      
       <div className="flex gap-4 ml-auto">
         <Link
           href={`/catalogue/${session?.user?.id}`}
@@ -42,6 +35,7 @@ const SignInButton = () => {
           href={`/garden/${session?.user?.id}`}
           className=" text-black-900 my-auto font-semibold hover:text-gray-400"
           scroll={false}
+          shallow={true}
         >
           My Garden
         </Link>
@@ -63,77 +57,74 @@ const SignInButton = () => {
         </button>
       </div>
     );
+  } else {
+    return (
+      <div className="flex gap-4">
+        {!isExample && (
+          <>
+            <Link
+              href={`/guide?sim=true`}
+              className="my-auto text-white font-semibold  "
+              scroll={false}
+            >
+              <button
+                onClick={() => {
+                  setExample(true);
+                }}
+                className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
+              >
+                Explore
+              </button>
+            </Link>
+
+            <button
+              onClick={() => signIn()}
+              className="inline custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
+            >
+              Sign In{" "}
+              <Image
+                height={30}
+                width={30}
+                src="/google.svg"
+                alt="google image"
+                className="ml-2"
+              />
+            </button>
+          </>
+        )}
+
+        {isExample && !moveToGarden && (
+          <>
+            <button
+              onClick={() => {
+                setExample(false);
+                router.refresh();
+              }}
+              className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
+            >
+              <Link
+                href={`/ `}
+                className="my-auto text-white font-semibold  "
+                scroll={false}
+                shallow={true}
+              >
+                Exit
+              </Link>
+            </button>
+
+            <Link
+              href={`/example?sim=true`}
+              className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+              scroll={false}
+              shallow={true}
+            >
+              Garden
+            </Link>
+          </>
+        )}
+      </div>
+    );
   }
-
-  return (
-    <div className="flex gap-4">
-      {(!isExample ) && (
-        <>
-       
-        <button
-          onClick={() => {
-            setExample(true);
-            router.refresh();
-          }}
-          className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
-        ><Link
-        href={`/guide?sim=true`}
-        className="my-auto text-white font-semibold  "
-        scroll={false}
-        shallow={true}
-      >
-          Explore
-          </Link>
-        </button>
-        </>
-      )}
-
-      {(isExample && !moveToGarden) && (
-        <>
-        <button
-          onClick={() => {
-            setExample(false);
-            router.refresh();
-          }}
-          className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
-        ><Link
-        href={`/ `}
-        className="my-auto text-white font-semibold  "
-        scroll={false}
-        shallow={true}
-      >
-          Exit
-          </Link>
-        </button>
-       
-        <Link
-          href={`/example?sim=true`}
-          className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
-          scroll={false}
-          shallow={true}
-        >
-          
-          Garden
-         
-        </Link>
-        </>
-      )}
-
-      <button
-        onClick={() => signIn() }
-        className="inline custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
-      >
-        Sign In{" "}
-        <Image
-          height={30}
-          width={30}
-          src="/google.svg"
-          alt="google image"
-          className="ml-2"
-        />
-      </button>
-    </div>
-  );
 };
 
 export default SignInButton;
