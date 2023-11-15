@@ -107,5 +107,5 @@ export async function fetchUserWeather({
   console.log("End of weather update for userId: ", userId);
 
 
-  return {weather: userWeather, city: city};
+  return {weather: userWeather, name: user?.name, city: city};
 }

@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import PlantCardGarden from "./PlantCardGarden";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import PlantCardPost from "./PlantCardPost";
 
 const UserGarden = ({ isExample }: { isExample: boolean }) => {
   
@@ -118,8 +119,11 @@ const UserGarden = ({ isExample }: { isExample: boolean }) => {
                     scienceName={plant.scienceName}
                     onDelete={handleDelete}
                     onWater={handleWater}
+                    plantDetails={plant.plantDetails}
                   />
+                  
                 ))}
+                <PlantCardPost />
               </div>
             </section>
           ) : (

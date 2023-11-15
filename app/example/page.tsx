@@ -55,7 +55,6 @@ async function page() {
 
   const weatherData = userData?.weather;
 
-
   return (
     <main className="overflow-hidden">
       <Chat />
@@ -70,12 +69,12 @@ async function page() {
             alt="Picture of gardener AI"
           />
           <div className="bubble-wide mx-30 p-6 bg-gray-50 text-gray-700  font-sans rounded-3xl shadow-xl bubble-bottom-left">
+            <p className="font-semibold">Hi visitor!</p>
             <p className="font-semibold">
-              Hi visitor! I'm Lily -- your AI gardener support for this web
-              application.
+              I'm Lily -- your AI gardener support for this web application.
             </p>
 
-            <p className="my-1">
+            <p className="my-2">
               I will remind you every day which plant to water.
             </p>
           </div>
@@ -84,21 +83,29 @@ async function page() {
           className="flex flex-row mt-1 padding-x padding-y max-width"
           id="myGarden"
         >
-          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-auto">
-            <h1 className="flex flex-item text-4xl font-extrabold">
+          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-aut w-3/4 pr-3 mt-8">
+            <h1 className="flex flex-item text-4xl font-extrabold mb-3">
               The Garden
             </h1>
-            <p className="my-2">
-              You need to give your lawn a good soak -- 1-inch of water -- once
-              or twice a week.
+            <p className="my-2">Welcome to the simulation.</p>
+
+            <p className="mb-2">
+              For this simulation, we suppose your garden is in the beautiful
+              city of Angers.
             </p>
-            <ul className="list-disc ml-20 mt-3">
+
+            <p className="mb-2">
+              The app helps you keep track of the weather for your watering
+              activity. It considers a plant is watered above 25 mm of weather
+              precipitations. It also provides decision support on when to water the plants given the weather and past watering activity.
+            </p>
+            <ul className="list-disc ml-10">
               <li>Span the plants you own</li>
-              <li>Check their watering requirement and levels</li>
+              <li>Keep track of their watering levels</li>
               <li>Water them if necessary</li>
             </ul>
           </div>
-          <div className="flex flex-item ml-auto xl:mr-20 md:mr-20">
+          <div className="flex flex-item ml-auto xl:mr-5 md:mr-10">
             <Image
               src="/humaaans.png"
               alt="hero"
@@ -111,7 +118,6 @@ async function page() {
         </div>
 
         <div className="padding-x padding-y max-width">
-          
           <UserGarden isExample={true} />
         </div>
 

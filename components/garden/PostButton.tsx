@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { toast } from "react-toastify";
 // https://animate.style/
 
@@ -13,55 +14,44 @@ interface Props {
   plantDetails?: any;
 }
 
-const AddButton = ({
+const PostButton = ({
   plantId,
   common_name,
   watering,
   pictureLink,
   scienceName,
+  plantDetails,
 }: Props) => {
   const { data: session } = useSession();
+
 
   const userId = session?.user?.id.toString()
     ? session?.user?.id.toString()
     : "6541480c6632d9ff072c5327";
 
-    console.log(userId)
 
   async function handlePost() {
-    const data = await fetch("/api/details/" + plantId, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => data.detailsData);
-
-    Promise.resolve(data).then(() =>
-      fetch(`/api/garden/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          plantId: plantId,
-          common_name: common_name,
-          wateringRequested: watering,
-          manualWateringLvl: 0,
-          pictureLink: pictureLink,
-          scienceName: scienceName,
-          plantDetails: {
-            watering_guide: data.section[0].description,
-            sunlight_guide: data.section[1].description,
-            pruning_guide: data.section[2].description,
-          },
-        }),
-      }).then((res) => {
-        if (res.status === 201) {
-          notifySuccess();
-        } else if (res.status === 208) {
-          notifyInfo();
-        }
-      })
-    );
+    fetch(`/api/garden/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        plantId: plantId,
+        common_name: common_name,
+        wateringRequested: watering,
+        manualWateringLvl: 0,
+        pictureLink: pictureLink,
+        scienceName: scienceName,
+        plantDetails: plantDetails,
+      }),
+    }).then((res) => {
+      if (res.status === 201) {
+        notifySuccess();
+      } else if (res.status === 208) {
+        notifyInfo();
+      }
+    });
   }
 
   const notifySuccess = () =>
@@ -90,13 +80,21 @@ const AddButton = ({
     });
 
   return (
-    <button
-      className="bg-green-700 text-white rounded-full ml-auto h-6 w-6"
-      onClick={handlePost}
+    <Link
+      href={
+        userId === "6541480c6632d9ff072c5327"
+          ? "/example?sim=true"
+          : `/garden/${userId}`
+      }
     >
-      +
-    </button>
+      <button
+        className="bg-green-700 text-white rounded-xl h-10 w-32 shadow-2xl "
+        onClick={handlePost}
+      >
+        Submit
+      </button>
+    </Link>
   );
 };
 
-export default AddButton;
+export default PostButton;

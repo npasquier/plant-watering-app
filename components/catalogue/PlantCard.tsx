@@ -7,7 +7,7 @@ import { mapWatering } from "@/utils";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
-import PlantDetails from "./PlantDetails";
+import PlantDetailsCatalogue from "./PlantDetailsCatalogue";
 import { useState } from "react";
 
 interface Props {
@@ -43,7 +43,7 @@ const PlantCard = ({
               <div className="bg-slate-200 opacity-90 rounded-full mx-auto text-gray-800 text-xl ">
                 ℹ
               </div>
-              <PlantDetails
+              <PlantDetailsCatalogue
                 isOpen={isOpen}
                 closeModal={() => {
                   setIsOpen(false);

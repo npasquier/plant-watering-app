@@ -8,6 +8,12 @@ interface WaterProps {
   shouldWater: boolean;
 }
 
+interface GuideProps {
+  watering_guide: string;
+  pruning_guide: string;
+  sunlight_guide: string;
+}
+
 interface PlantProps {
   id: number;
   common_name: string;
@@ -17,6 +23,7 @@ interface PlantProps {
   currentWaterActivity: Types.DocumentArray<WaterProps>;
   pictureLink?: string;
   scienceName?: string;
+  plantDetails?: GuideProps;
 }
 
 // Document definition
@@ -48,6 +55,18 @@ const waterSchema = new Schema<WaterProps>({
   },
 });
 
+const guideSchema = new Schema<GuideProps>({
+  watering_guide: {
+    type: String,
+  },
+  sunlight_guide: {
+    type: String,
+  },
+  pruning_guide: {
+    type: String,
+  },
+});
+
 const plantSchema = new Schema<PlantProps>({
   id: {
     type: Number,
@@ -75,6 +94,9 @@ const plantSchema = new Schema<PlantProps>({
   },
   scienceName: {
     type: String,
+  },
+  plantDetails: {
+    type: guideSchema,
   },
 });
 

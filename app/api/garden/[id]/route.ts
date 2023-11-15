@@ -8,7 +8,6 @@ import { NextRequest, NextResponse } from "next/server";
 */
 
 export async function GET(request: NextRequest, { params }: any) {
-
   await connectToDB();
   const userId = params.id;
 
@@ -19,17 +18,15 @@ export async function GET(request: NextRequest, { params }: any) {
 
     const userCity = user?.city;
 
-
     // Reset watering levels upon fecthing on a new week
     const weekNumber = getWeekNumber(new Date());
 
     if (user?.weekLog === 0 || (user?.weekLog && weekNumber > user?.weekLog)) {
-
       user?.garden?.forEach((plant) => {
         plant.totalWateringLvl = 0;
-        plant.currentWaterActivity.forEach(day => day.shouldWater = false);
-        plant.currentWaterActivity.forEach(day => day.manualWater = false);
-        plant.currentWaterActivity.forEach(day => day.precip = -1);
+        plant.currentWaterActivity.forEach((day) => (day.shouldWater = false));
+        plant.currentWaterActivity.forEach((day) => (day.manualWater = false));
+        plant.currentWaterActivity.forEach((day) => (day.precip = -1));
       });
 
       user.weekLog = weekNumber;
@@ -37,7 +34,6 @@ export async function GET(request: NextRequest, { params }: any) {
       user.save();
 
       console.log("Reset watering levels");
-
     } else {
       user?.save();
     }
@@ -56,8 +52,6 @@ export async function POST(request: NextRequest, { params }: any) {
   const data = await request.json();
 
   await connectToDB();
-
-  console.log(params);
 
   const id = params.id;
 
@@ -84,8 +78,10 @@ export async function POST(request: NextRequest, { params }: any) {
       ],
       wateringRequested: data.wateringRequested,
       totalWateringLvl: data.totalWateringLvl,
-      scienceName: data.scienceName[0],
+      scienceName: data.scienceName,
+      plantDetails: data.plantDetails,
     });
+
     user?.save();
 
     console.log("Plant Added to user and plant collection");
@@ -114,7 +110,8 @@ export async function POST(request: NextRequest, { params }: any) {
       ],
       wateringRequested: data.wateringRequested,
       totalWateringLvl: data.totalWateringLvl,
-      scienceName: data.scienceName[0],
+      scienceName: data.scienceName,
+      plantDetails: data.plantDetails,
     });
     user?.save();
 

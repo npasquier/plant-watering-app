@@ -79,10 +79,10 @@ export default function Home() {
                     <li>Obtain weekly weather precipitations,</li>
                     <li>Keep track of each plant's watering level</li>
                   </ol>
-                  <p className="my-3 mt-6 text-sm ">
+                  {/* <p className="my-3 mt-6 text-sm ">
                     *Signing In with Google is more secure than offering you a
                     way to subscribe on this web app.{" "}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </>

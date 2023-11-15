@@ -36,8 +36,6 @@ export async function PATCH(request: NextRequest, { params }: any) {
     return elem.id == plant;
   });
 
-  console.log(userPlant);
-
   userPlant?.filter((elem) => {
 
     elem.currentWaterActivity[data.dayIndex].manualWater = !elem.currentWaterActivity[data.dayIndex].manualWater;

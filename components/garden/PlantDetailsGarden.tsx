@@ -10,24 +10,22 @@ interface PlantDetailsProps {
   closeModal: () => void;
   plantId: number;
   plantPictureLink: string;
+  plantDetails : any;
+  common_name : string;
+  scienceName: string | undefined;
 }
 
-const PlantDetails = ({
+const PlantDetailsGarden = ({
   isOpen,
   closeModal,
   plantId,
+  common_name,
+  scienceName,
+  plantDetails,
   plantPictureLink,
 }: PlantDetailsProps) => {
-  const [detailsData, setData] = useState<any>(undefined);
+    
 
-  useEffect(() => {
-    isOpen &&
-      fetch("/api/details/" + plantId, { method: "GET" })
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data.detailsData);
-        });
-  }, [isOpen]);
 
 
   return (
@@ -86,13 +84,13 @@ const PlantDetails = ({
                         />
                       </div>
 
-                      {detailsData ? <div className="flex-1 flex flex-col gap-2">
+                      {plantDetails ? <div className="flex-1 flex flex-col gap-2">
                         <h2 className="font-semibold text-xl capitalize">
-                          {detailsData.common_name}
+                          {common_name}
                         </h2>
 
                         <h4 className="text-sm text-gray-400">
-                        {detailsData.scientific_name}
+                        {scienceName}
                         </h4>
 
                         <div className="mt-3 flex flex-wrap gap-4">
@@ -101,7 +99,7 @@ const PlantDetails = ({
                               💧 Watering
                             </h4>
                             <p className="text-black-100 font-semibold text-justify">
-                            "{detailsData.section[0].description}"
+                            "{plantDetails.watering_guide}"
                             </p>
                           </div>
                           <div className="flex justify-between gap-5 w-full text-right">
@@ -109,13 +107,13 @@ const PlantDetails = ({
                               ☀️ Sunlight
                             </h4>
                             <p className="text-black-100 font-semibold text-justify">
-                            "{detailsData.section[1].description}"
+                            "{plantDetails.sunlight_guide}"
                             </p>
                           </div>
                           <div className="flex justify-between gap-5 w-full text-right">
                             <h4 className="text-grey capitalize">🌾 Pruning</h4>
                             <p className="text-black-100 font-semibold text-justify">
-                              "{detailsData.section[2].description}"
+                              "{plantDetails.pruning_guide}"
                             </p>
                           </div>
                         </div>
@@ -132,4 +130,4 @@ const PlantDetails = ({
   );
 };
 
-export default PlantDetails;
+export default PlantDetailsGarden;

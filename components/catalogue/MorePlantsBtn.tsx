@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 
 const MorePlantsBtn = ({ query }: { query: string }) => {
   const router = useRouter();
-  const [maxCards, setMaxCards] = useState(12);
+  const [maxPage, setMaxPage] = useState(2);
 
   function increaseMax() {
+    setMaxPage((maxPage) => maxPage + 1);
+
     const searchParams = new URLSearchParams(window.location.search);
 
-    searchParams.set("nb", maxCards.toString());
+    searchParams.set("nb", maxPage.toString());
 
     const newPathname = `${
       window.location.pathname
@@ -20,9 +22,9 @@ const MorePlantsBtn = ({ query }: { query: string }) => {
   }
 
   useEffect(() => {
-    setMaxCards(12);
+    setMaxPage(2);
     const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set("nb", "8");
+    searchParams.set("nb", "1");
     const newPathname = `${
       window.location.pathname
     }?${searchParams.toString()}`;
@@ -33,12 +35,11 @@ const MorePlantsBtn = ({ query }: { query: string }) => {
   return (
     <button
       onClick={() => {
-        setMaxCards((maxCards) => maxCards + 4);
         increaseMax();
       }}
       className="flex justify-between mx-auto bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full"
     >
-      More plants (+4)
+      More plants
     </button>
   );
 };

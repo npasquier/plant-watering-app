@@ -11,7 +11,7 @@ export default async function Home({ searchParams }: any) {
 
   const allPlants = await fetchPlants({
     plantCommonName: searchParams.q || "",
-    maxCards: searchParams.nb || "8",
+    maxPage: searchParams.nb || "1",
   });
 
   let isExample = false; 
@@ -78,7 +78,7 @@ export default async function Home({ searchParams }: any) {
                       ? plant.default_image?.small_url
                       : "/picture-fail.png"
                   }
-                  scienceName={plant.scientific_name}
+                  scienceName={plant.scientific_name[0]}
                 />
               ))}
             </div>

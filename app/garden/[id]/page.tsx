@@ -69,7 +69,7 @@ export default async function page(searchParams: any) {
           />
           <div className="bubble-wide mx-30 p-6 bg-gray-50 text-gray-700  font-sans rounded-3xl shadow-xl  bubble-bottom-left">
             <p className="font-semibold">
-              Hi visitor! I'm Lily -- your AI gardener support for this web
+              Hi {userData?.name}! I'm Lily -- your AI gardener support for this web
               application.
             </p>
 

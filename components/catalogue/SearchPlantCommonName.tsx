@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useState, Fragment } from "react";
 import { plantCommonNames } from "@/constants";
 import { CheckIcon } from "@heroicons/react/20/solid";
-import { useRouter } from "next/navigation";
 
 interface PlantCommonNameProps {
   plantCommonName: string;
@@ -17,7 +16,6 @@ const SearchPlantCommonName = ({
   setPlantCommonName,
 }: PlantCommonNameProps) => {
   const [query, setQuery] = useState("");
-  const router= useRouter();
 
   const filteredPlantCommonNames =
     query === ""
@@ -29,7 +27,6 @@ const SearchPlantCommonName = ({
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
-
 
   return (
     <div className="flex-1 max-sm:w-full flex justify-start items-center">

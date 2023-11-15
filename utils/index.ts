@@ -1,21 +1,32 @@
 export async function fetchPlants({
   plantCommonName,
-  maxCards,
+  maxPage,
 }: {
   plantCommonName: string;
-  maxCards: string;
+  maxPage: string;
 }): Promise<any> {
   const APIKeyPlant = process.env.API_KEY_PLANT;
 
-  const response = await fetch(
-    `https://perenual.com/api/species-list?page=1&key=${APIKeyPlant}&q=${plantCommonName}`
+  const urls = [];
+
+  for (let i = 1; i <= Number(maxPage); i++) {
+    urls.push(`https://perenual.com/api/species-list?page=${i}&key=${APIKeyPlant}&q=${plantCommonName}`)
+  }
+
+  const result2 = await Promise.all(
+    urls.map(async (url) => {
+      const response = await fetch(url);
+      const dataFrame = await response.json();
+      return dataFrame.data;
+    })
   );
 
-  const result = await response.json();
 
-  //I Have sliced the response !!!!Because I want to test the website fitst */
+  const dataFrame= await Promise.resolve(result2).then(() => {
+    return result2.flat();
+  });
 
-  return result.data.slice(0, Number(maxCards));
+  return dataFrame.slice(0, 28 + 28 * (Number(maxPage)-1));
 }
 
 export async function fetchDetails(plantId: number): Promise<any> {
@@ -26,7 +37,6 @@ export async function fetchDetails(plantId: number): Promise<any> {
   );
 
   const result = await response.json();
-
 
   //I Have sliced the response !!!!Because I want to test the website fitst */
 

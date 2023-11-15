@@ -6,7 +6,6 @@ export const plantCommonNames = [
   "Basil",
   "Begonia",
   "Bonsai",
-  "Cactus",
   "Caladium",
   "Carnation",
   "Chrysanthemum",

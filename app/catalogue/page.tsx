@@ -9,7 +9,7 @@ import MorePlantsBtn from "@/components/catalogue/MorePlantsBtn";
 export default async function Home({ searchParams }: any) {
   const allPlants = await fetchPlants({
     plantCommonName: searchParams.q || "",
-    maxCards: searchParams.nb || "8",
+    maxPage: searchParams.nb || "1",
   });
 
   let isExample = false;
@@ -26,8 +26,8 @@ export default async function Home({ searchParams }: any) {
       <div className="mt-40 padding-x padding-y max-width" id="discover">
         <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
           <h1 className="text-4xl font-extrabold"> <span className="mx-1">🌿</span> Plant Catalogue</h1>
-          <ul className="list-disc ml-20 mt-3">
-            <li> Browse through the plants</li>
+          <ol className="list-decimal ml-20 mt-3">
+            <li> Browse through the plants. <em className="text-gray-500"> You can get further info by hovering on the card and clicking the info button. </em></li>
             <li>
               {" "}
               Add some to the garden by clicking on the button {" "}
@@ -35,8 +35,8 @@ export default async function Home({ searchParams }: any) {
                 +
               </button>
             </li>{" "}
-            <li>Go to the Garden page by clicking on its Link in the Navigation Bar</li>
-          </ul>
+            <li>Go to the Garden with the navigation bar</li>
+          </ol>
         </div>
 
         <div className="mt-12 w-full flex-between items-center flex-wrap gap-5">
@@ -68,7 +68,7 @@ export default async function Home({ searchParams }: any) {
                       key={plant.id}
                       plantId={plant.id}
                       common_name={plant.common_name}
-                      scienceName={plant.scientific_name}
+                      scienceName={plant.scientific_name[0]}
                       watering={
                         plant.watering && plant.id < 3000
                           ? plant.watering
