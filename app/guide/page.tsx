@@ -4,9 +4,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      <div className="mt-20 padding-x padding-y max-width h-screen gif">
-        <div className="flex flex-row flex-wrap mt-20">
-          <div className="w-[550px] ">
+      <div className="flex flex-col mt-20 padding-x padding-y max-width xl:h-screen gif">
+        <div className="flex flex-row flex-wrap mt-20 ">
+          <div className="w-[550px]">
             <AnimationWatering />
           </div>
 
@@ -32,7 +32,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-col mt-20 ">
+        <div className="flex flex-col mt-10 pb-8">
           <p className="mx-auto text-xl">Give it a go ! </p> 
           <p className="mx-auto mt-3">Click the link below and start adding PlantCards to the simulated garden.</p> 
           <button className="mx-auto my-5">

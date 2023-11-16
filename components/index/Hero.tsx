@@ -7,10 +7,10 @@ const Hero = () => {
     <div className="flex lg:flex-row flex-wrap-reverse gap-5 relative max-w-[1440px] h-screen mx-auto bg-nice-plant-color">
       <div className="lg:flex-1 lg:pt-48 pt-24 padding-x relative">
         <h1 className="xl:text-[68px] md:text-[52px] text-[40px] font-extrabold mt-10 font-darkGreen-color gif">
-        Grow green, let rain be your ally!
+        Plant care begins with raindrops
         </h1>
         <p className="xl:text-[27px] text-[22px] font-light mt-5 font-darkGreen-color gif-delayed">
-          Build on weekly weather precipitations to optimize the watering of your plants.
+          Build on weather precipitations to water your plants.
         </p>
       </div>
 

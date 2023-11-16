@@ -3,10 +3,10 @@
 import { useState } from "react";
 import AnimationPostPicture from "../lottie/AnimationPostPicture";
 import Image from "next/image";
-import AddButton from "../catalogue/AddButton";
 import PostButton from "./PostButton";
 
 const AddCardForm = () => {
+
   const [formData, setFormData] = useState<any>({
     common_name: "",
     scienceName: "",
@@ -16,6 +16,7 @@ const AddCardForm = () => {
     sunlight_guide: "",
     pruning_guide: "",
   });
+
 
   const handleInput = (e: any) => {
     const fieldName = e.target.name;

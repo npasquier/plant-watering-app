@@ -15,7 +15,7 @@ export default function Home() {
               </div>
               <div className="lg:my-auto  lg:w-[70%] w-[100%] lg:ml-12 ml-8 mt-8 relative">
                 <p className="my-3 text-2xl">
-                  <strong> Watering </strong> your lawn for a couple of minutes{" "}
+                  <strong> Watering </strong> your lawn for a 
                   <strong> every evening </strong> can have a{" "}
                   <strong>detrimental effect</strong>.
                 </p>
@@ -67,18 +67,14 @@ export default function Home() {
 
                 <div className="lg:flex-[1.5] flex flex-col my-auto ml-8">
                   <p className=" my-3 text-2xl">
-                    This web app gives a quick and easy way to{" "}
-                    <strong>manage your watering activity</strong>.
+                  <strong>Build on weather precipitations</strong> to improve{" "}
+                     your watering activity.
                   </p>
 
-                  <p className="my-3 mt-6 text-lg ">
-                    Sign in to discover its full potential:
+                  <p className="my-3 mt-6 ml-4 text-lg ">
+                    Sign in to discover its full potential: compose your garden, keep track of your watering activity with PlantCards.
                   </p>
-                  <ol className="list-decimal ml-8 mt-2 text-lg">
-                    <li>Compose your own garden,</li>
-                    <li>Obtain weekly weather precipitations,</li>
-                    <li>Keep track of each plant's watering level</li>
-                  </ol>
+        
                   {/* <p className="my-3 mt-6 text-sm ">
                     *Signing In with Google is more secure than offering you a
                     way to subscribe on this web app.{" "}

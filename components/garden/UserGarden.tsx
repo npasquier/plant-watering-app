@@ -11,7 +11,7 @@ const UserGarden = ({ isExample }: { isExample: boolean }) => {
   const { data: session, status } = useSession();
 
   const [data, setData] = useState([]);
-  const [isChanged, setChanged] = useState(false);
+  const [isChanged, setChanged] = useState(true);
 
   const userId =
      session?.user?.id
@@ -102,7 +102,7 @@ const UserGarden = ({ isExample }: { isExample: boolean }) => {
                 pauseOnHover
                 theme="light"
               />
-              <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-1 w-full gap-8 pt-3">
+              <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-2 w-full gap-8 pt-3">
                 {data?.map((plant: any) => (
                   <PlantCardGarden
                     key={plant.id}

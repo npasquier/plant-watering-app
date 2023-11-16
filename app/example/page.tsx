@@ -68,44 +68,54 @@ async function page() {
             priority
             alt="Picture of gardener AI"
           />
-          <div className="bubble-wide mx-30 p-6 bg-gray-50 text-gray-700  font-sans rounded-3xl shadow-xl bubble-bottom-left">
-            <p className="font-semibold">Hi visitor!</p>
-            <p className="font-semibold">
-              I'm Lily -- your AI gardener support for this web application.
-            </p>
+          <div className="bubble-wide bg-slate-100 mx-30 p-6  text-gray-700  font-sans rounded-3xl shadow-xl bubble-bottom-left ">
+            <div className="text-left px-5">
+              <p className="font-semibold mt-2">
+                Hi visitor, welcome to the simulation!
+              </p>
 
-            <p className="my-2">
-              I will remind you every day which plant to water.
-            </p>
+              <p className="my-1"> I'm Lily -- your AI gardener support.</p>
+
+              <p className="my-2 mt-5">
+                I will show you every day which plant to water. I also provide decision support to
+                help you with programming the watering days of your plants -- given
+                the weekly weather and your watering activity. I consider a plant is watered above 25 mm of weather
+                precipitations.{" "}
+              </p>
+
+              <p className="mb-2">
+                For this simulation, I suppose your garden is in the beautiful
+                city of Angers -- the French capital for horticulture.
+              </p>
+
+
+              <p className="mb-2 mt-5">
+                Enough talking, I let you explore the garden!
+              </p>
+            </div>
           </div>
         </div>
         <div
-          className="flex flex-row mt-1 padding-x padding-y max-width"
+          className="flex flex-row flex-wrap mt-1 padding-x padding-y max-width"
           id="myGarden"
         >
-          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-aut w-3/4 pr-3 mt-8">
+          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-auto w-1/2 pr-3 mt-8">
+            
+            
             <h1 className="flex flex-item text-4xl font-extrabold mb-3">
               The Garden
             </h1>
-            <p className="my-2">Welcome to the simulation.</p>
 
-            <p className="mb-2">
-              For this simulation, we suppose your garden is in the beautiful
-              city of Angers.
-            </p>
-
-            <p className="mb-2">
-              The app helps you keep track of the weather for your watering
-              activity. It considers a plant is watered above 25 mm of weather
-              precipitations. It also provides decision support on when to water the plants given the weather and past watering activity.
-            </p>
             <ul className="list-disc ml-10">
-              <li>Span the plants you own</li>
+              <li>
+                Span your PlantCards (go to the Catalogue to add some, or create
+                them)
+              </li>
               <li>Keep track of their watering levels</li>
               <li>Water them if necessary</li>
             </ul>
           </div>
-          <div className="flex flex-item ml-auto xl:mr-5 md:mr-10">
+          <div className="flex ml-10 xl:mr-5  ">
             <Image
               src="/humaaans.png"
               alt="hero"

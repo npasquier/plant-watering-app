@@ -26,11 +26,11 @@ export default async function Home({ searchParams }: any) {
       <div className="mt-40 padding-x padding-y max-width" id="discover">
         <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
           <h1 className="text-4xl font-extrabold"> <span className="mx-1">🌿</span> Plant Catalogue</h1>
-          <ol className="list-decimal ml-20 mt-3">
-            <li> Browse through the plants. <em className="text-gray-500"> You can get further info by hovering on the card and clicking the info button. </em></li>
+          <ol className="list-decimal xl:ml-20 ml-10 mt-3">
+            <li> Browse through the PlantCards. <em className="text-gray-500"> You can get further info by hovering on the card and clicking the info button. </em></li>
             <li>
               {" "}
-              Add some to the garden by clicking on the button {" "}
+              Add some PlantCards to the garden by clicking on the button {" "}
               <button className="ml-1 bg-green-700 text-white rounded-full h-6 w-6 cursor-text">
                 +
               </button>
