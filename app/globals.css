@@ -44,8 +44,6 @@ body {
     movement_one 40s ease-in-out infinite both;
   opacity: 1;
   position: relative;
-  left: 10%;
-  top: 20%;
 }
 
 @media (max-width: 1000px) {

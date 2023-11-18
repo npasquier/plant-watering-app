@@ -4,26 +4,18 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const SignInButton = () => {
   const { data: session } = useSession();
 
   const [isExample, setExample] = useState(false);
 
-  const [moveToGarden, setMove] = useState(false);
-
   const router = useRouter();
-
-  // useEffect(() => {
-  //   if (session?.user?.id) {
-  //     router.refresh();
-  //   }
-  // }, [session?.user?.id, isExample]);
 
   if (session?.user) {
     return (
-      <div className="flex gap-4 ml-auto">
+      <div className="flex gap-4 ml-auto max-md:hidden">
         <Link
           href={`/catalogue/${session?.user?.id}`}
           className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
@@ -59,7 +51,7 @@ const SignInButton = () => {
     );
   } else {
     return (
-      <div className="flex gap-4">
+      <div className="flex gap-4 max-md:hidden">
         {!isExample && (
           <>
             <Link
@@ -93,7 +85,7 @@ const SignInButton = () => {
           </>
         )}
 
-        {isExample && !moveToGarden && (
+        {isExample && (
           <>
             <button
               onClick={() => {
@@ -111,7 +103,13 @@ const SignInButton = () => {
                 Exit
               </Link>
             </button>
-
+            <Link
+              href={`catalogue?sim=true&nb=1`}
+              className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+              scroll={false}
+            >
+              Catalogue
+            </Link>
             <Link
               href={`/example?sim=true`}
               className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
