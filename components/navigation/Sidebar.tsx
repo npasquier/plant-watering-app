@@ -21,7 +21,7 @@ const Sidebar = ({
   return (
     <>
       <div
-        className={`sidebar-container fixed w-full h-full overflow-hidden justify-center  bg-nice-plant-color grid pt-[120px] left-0 ${isOpen && "z-10"}`}
+        className={`sidebar-container fixed w-full h-full overflow-hidden justify-center bg-nice-plant-color grid pt-[120px] left-0 ${isOpen ? "z-10" : "z-0"}`}
         style={{
           opacity: `${isOpen ? "1" : "0"}`,
           transitionDuration: "500ms",
@@ -38,7 +38,7 @@ const Sidebar = ({
           </svg>
         </button>
 
-        <ul className="sidebar-nav text-center leading-relaxed text-xl">
+        <ul className={`sidebar-nav text-center leading-relaxed text-xl ${isOpen ? "z-10" : "z-0"}`}>
           <li>
             <Link href="/about" onClick={toggle}>
               <p>About Us</p>
