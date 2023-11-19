@@ -23,7 +23,7 @@ const Sidebar = ({
       <div
         className={`sidebar-container fixed w-full h-full overflow-hidden justify-center bg-nice-plant-color grid ${
           isOpen ? "grid" : "none"
-        } pt-[120px] left-0 ${isOpen ? "z-10" : "z-0"}`}
+        } pt-[120px] left-0 ${isOpen ? "z-50" : "z-0"}`}
         style={{
           opacity: `${isOpen ? "1" : "0"}`,
           transitionDuration: "500ms",

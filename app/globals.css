@@ -43,15 +43,12 @@ body {
   animation: transform 20s ease-in-out infinite both alternate,
     movement_one 40s ease-in-out infinite both;
   opacity: 1;
-  position: relative;
 }
 
 @media (max-width: 1000px) {
   .gooey-rec {
     height: 300px;
     width: 340px;
-    left: 10%;
-    top: 40%;
   }
 }
 

@@ -5,6 +5,7 @@ import PlantCardGarden from "./PlantCardGarden";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import PlantCardPost from "./PlantCardPost";
+import AnimationPostPicture from "../lottie/AnimationPostPicture";
 
 const UserGarden = ({ isExample }: { isExample: boolean }) => {
   
@@ -135,6 +136,7 @@ const UserGarden = ({ isExample }: { isExample: boolean }) => {
           )
         ) : (
           <div className="mt-16 flex justify-center items-center flex-col gap-2">
+            <AnimationPostPicture />
             <h2 className="text-black text-xl font-bold">Loading...</h2>
           </div>
         )
