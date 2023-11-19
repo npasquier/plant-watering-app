@@ -4,8 +4,8 @@ import InfoGifLeft from "@/components/index/InfoGifLeft";
 
 export default function Home() {
   return (
-      <main className="overflow-hidden">
-        
+      <main className="overflow-hidden ">
+
         <Hero />
 
         <div className="relative mt-3">
