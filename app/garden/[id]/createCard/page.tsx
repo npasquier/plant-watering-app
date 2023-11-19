@@ -8,9 +8,9 @@ export default async function page(searchParams: any) {
   const user = await UserModel.findById(searchParams.params.id);
 
   return (
-    <main className="overflow-hidden h-screen">
-      <section className="my-20 ">
-        <div className="mt-20 w-screen  max-width mb-auto">
+    <main className="overflow-hidden">
+      <section className="my-20">
+        <div className="mt-20 w-screen max-width mb-auto">
           <ToastContainer
             position="top-right"
             autoClose={4000}
@@ -39,8 +39,8 @@ export default async function page(searchParams: any) {
               <p className="my-1">Please fill in the required inputs.</p>
             </div>
           </div>
-          <div className="padding-x padding-y max-width mt-8">
-            <AddCardForm />
+          <div className="padding-x  max-width mt-8">
+          <AddCardForm />
           </div>
         </div>
       </section>

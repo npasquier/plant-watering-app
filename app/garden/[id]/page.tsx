@@ -80,24 +80,24 @@ export default async function page(searchParams: any) {
         </div>
 
         <div
-          className="flex flex-row mt-0 padding-x padding-y max-width"
+          className="flex flex-row flex-wrap mt-1 padding-x padding-y max-width"
           id="myGarden"
         >
-          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-auto">
-            <h1 className="flex flex-item text-4xl font-extrabold">
-              My Garden
+          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-auto lg:w-1/2 lg:pr-3 mt-8 ">
+            <h1 className="flex flex-item text-4xl font-extrabold mb-3">
+              The Garden
             </h1>
-            <p className="my-2">
-              You need to give your lawn a good soak -- 1-inch of water -- once
-              or twice a week.
-            </p>
-            <ul className="list-disc ml-20 mt-3">
-              <li>Span the plants you own</li>
-              <li>Check their watering requirement and levels</li>
+
+            <ul className="list-disc ml-10">
+              <li>
+                Span your PlantCards (go to the Catalogue to add some, or create
+                them)
+              </li>
+              <li>Keep track of their watering levels</li>
               <li>Water them if necessary</li>
             </ul>
           </div>
-          <div className="flex flex-item ml-auto xl:mr-20 md:mr-20">
+          <div className="flex xl:ml-10 xl:mr-5  ">
             <Image
               src="/humaaans.png"
               alt="hero"

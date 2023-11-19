@@ -29,8 +29,8 @@ const AddCardForm = () => {
   };
 
   return (
-    <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 md:grid-cols-3 grid-cols-1 sm:grid-cols-1 w-full gap-8 pt-3">
-      <div className=" flex  flex-col ">
+    <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 w-full gap-8 pt-3">
+      <div className=" flex flex-col ">
         <div className="m-8">
           <AnimationPostPicture />
         </div>
@@ -142,8 +142,8 @@ const AddCardForm = () => {
         </div>
       </div>
 
-      <div className=" col-span-2 bg-gray-100 rounded-xl border-2 border-gray-100 shadow-lg p-5">
-        <div className="flex gap-3 relative">
+      <div className=" lg:col-span-2 bg-gray-100 rounded-xl border-2 border-gray-100 shadow-lg p-5">
+        <div className="flex lg:flex-row flex-col gap-3 relative">
           <button className="relative w-10 h-10 z-10 text-white rounded-full  visible ">
             <div className="bg-slate-200 opacity-90 rounded-full mx-auto text-gray-800 text-xl ">
               ℹ
@@ -162,8 +162,7 @@ const AddCardForm = () => {
             onChange={handleInput}
             value={formData.pictureLink}
           />
-          <p className="my-auto">❌</p> <p className="my-auto">...</p>{" "}
-          <p className="my-auto">✅</p>
+          
         </div>
 
         <div className="p-4">
