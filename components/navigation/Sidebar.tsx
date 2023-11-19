@@ -21,7 +21,9 @@ const Sidebar = ({
   return (
     <>
       <div
-        className={`sidebar-container fixed w-full h-full overflow-hidden justify-center bg-nice-plant-color grid pt-[120px] left-0 ${isOpen ? "z-10" : "z-0"}`}
+        className={`sidebar-container fixed w-full h-full overflow-hidden justify-center bg-nice-plant-color grid ${
+          isOpen ? "grid" : "none"
+        } pt-[120px] left-0 ${isOpen ? "z-10" : "z-0"}`}
         style={{
           opacity: `${isOpen ? "1" : "0"}`,
           transitionDuration: "500ms",
@@ -38,7 +40,11 @@ const Sidebar = ({
           </svg>
         </button>
 
-        <ul className={`sidebar-nav text-center leading-relaxed text-xl ${isOpen ? "z-10" : "z-0"}`}>
+        <ul
+          className={`sidebar-nav text-center leading-relaxed text-xl ${
+            isOpen ? "z-10" : "z-0"
+          }`}
+        >
           <li>
             <Link href="/about" onClick={toggle}>
               <p>About Us</p>
@@ -51,6 +57,7 @@ const Sidebar = ({
                   href={`/catalogue/${session?.user?.id}`}
                   className="my-auto text-green-800 font-semibold"
                   scroll={false}
+                  onClick={toggle}
                 >
                   Catalogue
                 </Link>
@@ -58,21 +65,25 @@ const Sidebar = ({
               <li>
                 <Link
                   href={`/garden/${session?.user?.id}`}
-                  className="my-auto text-green-800 font-semibold"
+                  className="my-auto text-green-800 hover:text-green-600 font-semibold"
                   scroll={false}
                   shallow={true}
+                  onClick={toggle}
                 >
                   My Garden
                 </Link>
               </li>
               <li>
-                <p className="flex flex-row text-gray-800 my-auto ">
+                <p className="flex flex-row text-gray-800 hover:text-gray-600 my-auto ">
                   {session.user.name}
                 </p>
               </li>
               <li>
                 <button
-                  onClick={() => signOut()}
+                  onClick={() => {
+                    signOut();
+                    toggle;
+                  }}
                   className=" text-red-900 hover:text-red-600"
                 >
                   Sign Out
@@ -86,23 +97,23 @@ const Sidebar = ({
               <li>
                 <Link
                   href={`/guide?sim=true`}
-                  className="my-auto text-green-800 font-semibold"
+                  className="my-auto text-green-800 hover:text-green-600 font-semibold"
                   scroll={false}
+                  onClick={() => {
+                    setExample(true);
+                    toggle();
+                  }}
                 >
-                  <button
-                    onClick={() => {
-                      setExample(true);
-                    }}
-                    className="inline my-auto ml-auto hover:bg-green-600 rounded-full p-3"
-                  >
-                    Explore
-                  </button>
+                  Explore
                 </Link>
               </li>
               <li>
                 <button
-                  onClick={() => signIn()}
-                  className="my-auto text-green-800 font-semibold"
+                  onClick={() => {
+                    signIn();
+                    toggle();
+                  }}
+                  className="my-auto text-green-800 hover:text-green-600 font-semibold"
                 >
                   Sign in
                 </button>
@@ -112,27 +123,26 @@ const Sidebar = ({
           {isExample && !session && (
             <>
               <li>
-                <button
+                <Link
+                  href={`/ `}
+                  className="my-auto text-red-800 hover:text-red-600 font-semibold"
+                  scroll={false}
                   onClick={() => {
                     setExample(false);
+                    toggle();
                     router.refresh();
                   }}
                 >
-                  <Link
-                    href={`/ `}
-                    className="my-auto text-red-800 font-semibold"
-                    scroll={false}
-                    shallow={true}
-                  >
-                    Exit
-                  </Link>
-                </button>
+                  Exit
+                </Link>
               </li>
               <li>
                 <Link
                   href={`catalogue?sim=true&nb=1`}
-                  className="my-auto text-green-800 font-semibold"
+                  className="my-auto text-green-800 hover:text-green-600 font-semibold"
                   scroll={false}
+                  shallow={true}
+                  onClick={toggle}
                 >
                   Catalogue
                 </Link>
@@ -140,9 +150,10 @@ const Sidebar = ({
               <li>
                 <Link
                   href={`/example?sim=true`}
-                  className="my-auto text-green-800 font-semibold"
+                  className="my-auto text-green-800 hover:text-green-600 font-semibold"
                   scroll={false}
                   shallow={true}
+                  onClick={toggle}
                 >
                   Garden
                 </Link>

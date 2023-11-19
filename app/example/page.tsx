@@ -1,6 +1,5 @@
 import UserGarden from "@/components/garden/UserGarden";
 import { UserWeather } from "@/components/garden/UserWeather";
-import { ToastContainer } from "react-toastify";
 import Image from "next/image";
 import Chat from "@/components/chat/Chat";
 import { fetchUserWeather } from "@/utils/weather";
@@ -9,6 +8,7 @@ import {
   updateWateringLevels,
 } from "@/utils/watering";
 import "react-toastify/dist/ReactToastify.css";
+
 
 async function getExample() {
   const userWeatherAndCityData = await fetchUserWeather({

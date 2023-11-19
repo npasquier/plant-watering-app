@@ -15,7 +15,7 @@ const Hero = () => {
       </div>
 
       <div className="xl:flex-[1.5] flex-[1] relative z-0">
-        <div className="gooey-rec xl:mx-auto xl:mt-48 lg:mt-64 ">
+        <div className="gooey-rec xl:mx-auto xl:mt-48 lg:mt-64">
           <Image
             src="/hero.jpeg"
             alt="hero"
