@@ -9,7 +9,6 @@ import {
 } from "@/utils/watering";
 import "react-toastify/dist/ReactToastify.css";
 
-
 async function getExample() {
   const userWeatherAndCityData = await fetchUserWeather({
     userId: "6541480c6632d9ff072c5327",
@@ -60,7 +59,7 @@ async function page() {
       <Chat />
 
       <div className="w-screen mt-20  gif">
-        <div className="flex flex-row gap-2 mt-32  padding-x padding-y max-width ">
+        <div className="flex flex-row max-md:flex-col gap-2 lg:mt-32  padding-x padding-y max-width ">
           <Image
             src="/gardener.svg"
             width={80}
@@ -68,7 +67,7 @@ async function page() {
             priority
             alt="Picture of gardener AI"
           />
-          <div className="bubble-wide bg-slate-100 mx-30 p-6  text-gray-700  font-sans rounded-3xl shadow-xl bubble-bottom-left ">
+          <div className="bubble-wide bg-slate-100 mx-30 p-6  text-gray-700  font-sans rounded-3xl shadow-xl bubble-bottom-left">
             <div className="text-left px-5">
               <p className="font-semibold mt-2">
                 Hi visitor, welcome to the simulation!
@@ -77,9 +76,10 @@ async function page() {
               <p className="my-1"> I'm Lily -- your AI gardener support.</p>
 
               <p className="my-2 mt-5">
-                I will show you every day which plant to water. I also provide decision support to
-                help you with programming the watering days of your plants -- given
-                the weekly weather and your watering activity. I consider a plant is watered above 25 mm of weather
+                I will show you every day which plant to water. I also provide
+                decision support to help you with programming the watering days
+                of your plants -- given the weekly weather and your watering
+                activity. I consider a plant is watered above 25 mm of weather
                 precipitations.{" "}
               </p>
 
@@ -87,7 +87,6 @@ async function page() {
                 For this simulation, I suppose your garden is in the beautiful
                 city of Angers -- the French capital for horticulture.
               </p>
-
 
               <p className="mb-2 mt-5">
                 Enough talking, I let you explore the garden!
@@ -99,9 +98,7 @@ async function page() {
           className="flex flex-row flex-wrap mt-1 padding-x padding-y max-width"
           id="myGarden"
         >
-          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-auto w-1/2 pr-3 mt-8">
-            
-            
+          <div className="flex flex-col flex-wrap items-start justify-start gap-y-2.5 text-black-100 my-auto lg:w-1/2 lg:pr-3 mt-8 ">
             <h1 className="flex flex-item text-4xl font-extrabold mb-3">
               The Garden
             </h1>
@@ -115,7 +112,7 @@ async function page() {
               <li>Water them if necessary</li>
             </ul>
           </div>
-          <div className="flex ml-10 xl:mr-5  ">
+          <div className="flex xl:ml-10 xl:mr-5  ">
             <Image
               src="/humaaans.png"
               alt="hero"

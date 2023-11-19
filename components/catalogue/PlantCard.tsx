@@ -37,7 +37,7 @@ const PlantCard = ({
         <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-gray-100 hover:bg-white hover:shadow-md  group rounded-3xl shadow-md">
           <div className="flex w-full">
             <button
-              className="relative w-10 h-10 z-10 text-white rounded-full  invisible group-hover:visible"
+              className="relative w-10 h-10 z-10 text-white rounded-full invisible group-hover:visible"
               onClick={() => setIsOpen(true)}
             >
               <div className="bg-slate-200 opacity-90 rounded-full mx-auto text-gray-800 text-xl ">

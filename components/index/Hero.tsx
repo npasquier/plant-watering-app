@@ -5,7 +5,7 @@ import Image from "next/image";
 const Hero = () => {
   return (
     <div className="flex lg:flex-row flex-wrap-reverse h-screen bg-nice-plant-color">
-      <div className="lg:flex-1 xl:pt-48 lg:pt-72  xl:px-16 px-8 ">
+      <div className="lg:flex-1 xl:pt-48 lg:pt-72  xl:px-16 px-8 max-md:text-center">
         <h1 className="xl:text-[68px] md:text-[52px] text-[40px] font-extrabold xl:mt-10 font-darkGreen-color gif">
           Plant care begins with raindrops
         </h1>

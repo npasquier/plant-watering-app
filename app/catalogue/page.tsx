@@ -23,7 +23,7 @@ export default async function Home({ searchParams }: any) {
 
   return (
     <main className="overflow-hidden">
-      <div className="mt-40 padding-x padding-y max-width gif" id="discover">
+      <div className="lg:mt-40 mt-32 padding-x padding-y max-width gif" id="discover">
         <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
           <h1 className="text-4xl font-extrabold"> <span className="mx-1">🌿</span> Plant Catalogue</h1>
           <ol className="list-decimal xl:ml-20 ml-10 mt-3">
