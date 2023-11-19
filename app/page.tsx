@@ -5,7 +5,7 @@ import InfoGifLeft from "@/components/index/InfoGifLeft";
 export default function Home() {
   return (
       <main>
-        <Hero />
+        {/* <Hero /> */}
 
         <div className="relative mt-3">
           <InfoGifLeft>
