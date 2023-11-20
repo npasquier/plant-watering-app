@@ -29,7 +29,6 @@ const handler = NextAuth({
 
     await connectToDB();
 
-
     const sessionUser = await UserModel.findOne({ email: session.user.email });
 
     session.user.id = sessionUser?._id.toString();

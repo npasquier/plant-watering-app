@@ -6,7 +6,6 @@ import Image from "next/image";
 import PostButton from "./PostButton";
 
 const AddCardForm = () => {
-
   const [formData, setFormData] = useState<any>({
     common_name: "",
     scienceName: "",
@@ -16,7 +15,6 @@ const AddCardForm = () => {
     sunlight_guide: "",
     pruning_guide: "",
   });
-
 
   const handleInput = (e: any) => {
     const fieldName = e.target.name;
@@ -30,7 +28,7 @@ const AddCardForm = () => {
 
   return (
     <div className="grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 w-full gap-8 pt-3">
-      <div className=" flex flex-col ">
+      <div className="flex flex-col ">
         <div className="m-8">
           <AnimationPostPicture />
         </div>
@@ -162,7 +160,6 @@ const AddCardForm = () => {
             onChange={handleInput}
             value={formData.pictureLink}
           />
-          
         </div>
 
         <div className="p-4">
