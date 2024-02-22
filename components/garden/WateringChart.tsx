@@ -1,35 +1,68 @@
 "use client";
 
+import { Bar } from "react-chartjs-2";
+import "chart.js/auto";
+
 import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
 
 import { Dialog, Transition } from "@headlessui/react";
-import AnimationPostPicture from "../lottie/AnimationPostPicture";
+import { mapWatering } from "@/utils";
 
 interface PlantDetailsProps {
   isOpen: boolean;
   closeModal: () => void;
   plantId: number;
+  wateringRequested: string;
   plantPictureLink: string;
+  common_name: string;
+  scienceName: string | undefined;
 }
 
-const PlantDetailsCatalogue = ({
+const WateringChart = ({
   isOpen,
   closeModal,
   plantId,
+  wateringRequested,
+  common_name,
+  scienceName,
   plantPictureLink,
 }: PlantDetailsProps) => {
-  const [detailsData, setData] = useState<any>(undefined);
+  const monthlyWatering = {
+    January: mapWatering(wateringRequested || "").number,
+    February: mapWatering(wateringRequested || "").number,
+    March: mapWatering(wateringRequested || "").number,
+    April: mapWatering(wateringRequested || "").number,
+    May: mapWatering(wateringRequested || "").number+1,
+    June: mapWatering(wateringRequested || "").number+1,
+    July: mapWatering(wateringRequested || "").number+1,
+    August: mapWatering(wateringRequested || "").number+1,
+    September: mapWatering(wateringRequested || "").number,
+    October: mapWatering(wateringRequested || "").number,
+    November: mapWatering(wateringRequested || "").number,
+    December: mapWatering(wateringRequested || "").number,
+  };
 
-  useEffect(() => {
-    isOpen &&
-      fetch("/api/details/" + plantId, { method: "GET" })
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data.detailsData);
-        });
-  }, [isOpen]);
+  const data = {
+    labels: Object.keys(monthlyWatering),
+    datasets: [
+      {
+        label: `Watering times per week`,
+        data: Object.values(monthlyWatering),
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
 
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
 
   return (
     <>
@@ -75,52 +108,21 @@ const PlantDetailsCatalogue = ({
 
                   <div className="flex-1 flex flex-col gap-3 shadow-2xl">
                     <div className="relative w-full h-180 bg-gray-100 bg-cover bg-center rounded-2xl px-8 py-8 ">
-                      <div className="relative place-self-center h-48 w-48 my-3 mx-auto object-contain ">
-                        <Image
-                          src={plantPictureLink}
-                          alt="Plant Picture"
-                          width="0"
-                          height="0"
-                          sizes="100vw"
-                          priority
-                          className="absolute w-full h-auto z-1 object-contain border p-1 rounded-full bg-white "
-                        />
-                      </div>
+                      
 
-                      {detailsData ? <div className="flex-1 flex flex-col gap-2">
+                      <div className="flex-1 flex flex-col gap-2">
                         <h2 className="font-semibold text-xl capitalize">
-                          {detailsData.common_name}
+                          {common_name}
                         </h2>
 
-                        <h4 className="text-sm text-gray-400">
-                        {detailsData.scientific_name}
-                        </h4>
+                        <h4 className="text-sm text-gray-400">{scienceName}</h4>
 
                         <div className="mt-3 flex flex-wrap gap-4">
                           <div className="flex justify-between gap-5 w-full text-right">
-                            <h4 className="text-grey capitalize">
-                              💧 Watering
-                            </h4>
-                            <p className="text-black-100 font-semibold text-justify">
-                            "{detailsData.section[0].description}"
-                            </p>
-                          </div>
-                          <div className="flex justify-between gap-5 w-full text-right">
-                            <h4 className="text-grey capitalize">
-                              ☀️ Sunlight
-                            </h4>
-                            <p className="text-black-100 font-semibold text-justify">
-                            "{detailsData.section[1].description}"
-                            </p>
-                          </div>
-                          <div className="flex justify-between gap-5 w-full text-right">
-                            <h4 className="text-grey capitalize">🌾 Pruning</h4>
-                            <p className="text-black-100 font-semibold text-justify">
-                              "{detailsData.section[2].description}"
-                            </p>
+                            <Bar data={data} options={options} />
                           </div>
                         </div>
-                      </div> : <div>  Loading ... </div> }
+                      </div>
                     </div>
                   </div>
                 </Dialog.Panel>
@@ -133,4 +135,4 @@ const PlantDetailsCatalogue = ({
   );
 };
 
-export default PlantDetailsCatalogue;
+export default WateringChart;

@@ -4,29 +4,33 @@ import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
 
 import { Dialog, Transition } from "@headlessui/react";
+import WateringChart from "./WateringChart";
+import { FaChartBar } from "react-icons/fa";
+import { FaCog } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
 
 interface PlantDetailsProps {
   isOpen: boolean;
   closeModal: () => void;
+  wateringRequested: string;
   plantId: number;
   plantPictureLink: string;
-  plantDetails : any;
-  common_name : string;
+  plantDetails: any;
+  common_name: string;
   scienceName: string | undefined;
 }
 
 const PlantDetailsGarden = ({
   isOpen,
   closeModal,
+  wateringRequested,
   plantId,
   common_name,
   scienceName,
   plantDetails,
   plantPictureLink,
 }: PlantDetailsProps) => {
-    
-
-
+  const [showChart, setShowChart] = useState(false);
 
   return (
     <>
@@ -55,7 +59,18 @@ const PlantDetailsGarden = ({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="relative w-full max-w-3xl - max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white text-left shadow-xl transition-all flex flex-col gap-5">
+                <Dialog.Panel className="relative w-full max-w-4xl - max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white text-left shadow-xl transition-all flex flex-col gap-5">
+                  <WateringChart
+                    isOpen={showChart}
+                    closeModal={() => {
+                      setShowChart(false);
+                    }}
+                    plantPictureLink={plantPictureLink}
+                    plantId={plantId}
+                    wateringRequested={wateringRequested}
+                    common_name={common_name}
+                    scienceName={scienceName}
+                  />
                   <button
                     type="button"
                     className="absolute top-2 right-2 z-10 w-fit p-2 bg-slate-200 rounded-full"
@@ -83,41 +98,81 @@ const PlantDetailsGarden = ({
                           className="absolute w-full h-auto z-1 object-contain border p-1 rounded-full bg-white "
                         />
                       </div>
+                      <div className="flex gap-2 items-center justify-center mx-auto w-20">
+                        <button
+                          className="group  relative w-6 h-6 flex items-center justify-center rounded-full bg-blue-200 hover:bg-blue-400 text-white shadow-lg "
+                          onClick={() => setShowChart(true)}
+                        >
+                          <FaChartBar className="text-lg" />
+                          {/* Tooltip (optional) */}
+                          <span className="absolute bottom-full mb-2 hidden group-hover:inline-block w-32 text-center text-sm bg-black text-white p-2 rounded-xl shadow-lg">
+                            View Watering Chart
+                          </span>
+                        </button>
 
-                      {plantDetails ? <div className="flex-1 flex flex-col gap-2">
-                        <h2 className="font-semibold text-xl capitalize">
-                          {common_name}
-                        </h2>
+                        <button
+                          className="group  relative w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-400 text-white shadow-lg "
+                          onClick={() => console.log("Modify PlantCard")}
+                        >
+                          <FaCog className="text-lg" />{" "}
+                          {/* Tooltip (optional) */}
+                          <span className="absolute bottom-full mb-2 hidden group-hover:inline-block w-32 text-center text-sm bg-black text-white p-2 rounded-xl shadow-lg">
+                            Modify
+                          </span>
+                        </button>
 
-                        <h4 className="text-sm text-gray-400">
-                        {scienceName}
-                        </h4>
+                        <button
+                          className="group  relative w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-400 text-white shadow-lg "
+                          onClick={() => console.log("Sending PlantCard to PlantExchange")}
+                        >
+                          <FaPaperPlane className="text-lg" />
+                          {/* Tooltip (optional) */}
+                          <span className="absolute bottom-full mb-2 hidden group-hover:inline-block w-32 text-center text-sm bg-black text-white p-2 rounded-xl shadow-lg">
+                            Send to PlantExchange
+                          </span>
+                        </button>
+                      </div>
 
-                        <div className="mt-3 flex flex-wrap gap-4">
-                          <div className="flex justify-between gap-5 w-full text-right">
-                            <h4 className="text-grey capitalize">
-                              💧 Watering
-                            </h4>
-                            <p className="text-black-100 font-semibold text-justify">
-                            "{plantDetails.watering_guide}"
-                            </p>
-                          </div>
-                          <div className="flex justify-between gap-5 w-full text-right">
-                            <h4 className="text-grey capitalize">
-                              ☀️ Sunlight
-                            </h4>
-                            <p className="text-black-100 font-semibold text-justify">
-                            "{plantDetails.sunlight_guide}"
-                            </p>
-                          </div>
-                          <div className="flex justify-between gap-5 w-full text-right">
-                            <h4 className="text-grey capitalize">🌾 Pruning</h4>
-                            <p className="text-black-100 font-semibold text-justify">
-                              "{plantDetails.pruning_guide}"
-                            </p>
+                      {plantDetails ? (
+                        <div className="flex-1 flex flex-col gap-2">
+                          <h2 className="font-semibold text-xl capitalize">
+                            {common_name}
+                          </h2>
+
+                          <h4 className="text-sm text-gray-400">
+                            {scienceName}
+                          </h4>
+
+                          <div className="mt-3 flex flex-wrap gap-4">
+                            <div className="flex justify-between gap-5 w-full text-right">
+                              <h4 className="text-grey capitalize">
+                                💧 Watering
+                              </h4>
+                              <p className="text-black-100 font-semibold text-justify">
+                                "{plantDetails.watering_guide}"
+                              </p>
+                            </div>
+                            <div className="flex justify-between gap-5 w-full text-right">
+                              <h4 className="text-grey capitalize">
+                                ☀️ Sunlight
+                              </h4>
+                              <p className="text-black-100 font-semibold text-justify">
+                                "{plantDetails.sunlight_guide}"
+                              </p>
+                            </div>
+                            <div className="flex justify-between gap-5 w-full text-right">
+                              <h4 className="text-grey capitalize">
+                                🌾 Pruning
+                              </h4>
+                              <p className="text-black-100 font-semibold text-justify">
+                                "{plantDetails.pruning_guide}"
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div> : <div> Loading ... </div> }
+                      ) : (
+                        <div> Loading ... </div>
+                      )}
                     </div>
                   </div>
                 </Dialog.Panel>

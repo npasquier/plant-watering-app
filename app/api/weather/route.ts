@@ -16,7 +16,6 @@ export async function GET() {
               userId: user._id.toString(),
             });
             user.save();
-            console.log("... should be okay now", user.city, weeklyWeather);
             resolve(true);
           }
         });

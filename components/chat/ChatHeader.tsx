@@ -8,21 +8,25 @@ const ChatHeader = () => {
 
   return (
     <div className="w-full flex gap-1 justify-center items-center text-zinc-800 overflow-hidden">
-      {!openBubble && (
-        <div
-          className={`bubble bubble-bottom-right {openBubble && "bg-blue-300" }`}
-        >
-          Hey ! You can also chat with me here. 😊
-        </div>
-      )}
+      {!openBubble ? (
+        <Image
+        src="/chat.svg"
+        width={50}
+        height={50}
+        priority
+        alt="Picture of chat bubble"
+        onClick={() => setOpenBubble(true)}
+      />
+      ) : (
       <Image
         src="/gardener.svg"
         width={80}
         height={80}
         priority
         alt="Picture of gardener AI"
-        onClick={() => setOpenBubble(true)}
-      />
+        onClick={(prev) => setOpenBubble(!prev)}
+      />)
+      }
       {/* <p className="text-bold px-2">Gardenbuddy support</p> */}
     </div>
   );

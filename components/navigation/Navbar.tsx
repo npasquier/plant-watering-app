@@ -1,14 +1,22 @@
-
-
 import Link from "next/link";
 import Image from "next/image";
 import SignInButton from "./SignInButton";
 
-const Navbar = ( {toggle, isOpen}: {toggle: () => void, isOpen: boolean}) => {
+const Navbar = ({
+  toggle,
+  isOpen,
+}: {
+  toggle: () => void;
+  isOpen: boolean;
+}) => {
   return (
     <header className="w-full absolute z-10">
       <nav className="max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4 ">
-        <Link href={"/"} className="flex justify-center items-center" scroll={false}>
+        <Link
+          href={"/"}
+          className="flex justify-center items-center"
+          scroll={false}
+        >
           <Image
             src="/logo.svg"
             alt="logo"
@@ -20,8 +28,11 @@ const Navbar = ( {toggle, isOpen}: {toggle: () => void, isOpen: boolean}) => {
           <h2 className="font-bold text-green-900">Plant Watering App</h2>
         </Link>
 
-        <SignInButton />
+       
 
+
+
+        <SignInButton />
 
         <button
           type="button"

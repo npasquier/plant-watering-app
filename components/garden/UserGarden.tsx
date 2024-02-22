@@ -8,33 +8,32 @@ import PlantCardPost from "./PlantCardPost";
 import AnimationPostPicture from "../lottie/AnimationPostPicture";
 
 const UserGarden = ({ isExample }: { isExample: boolean }) => {
-  
   const { data: session, status } = useSession();
 
   const [data, setData] = useState([]);
   const [isChanged, setChanged] = useState(true);
 
-  const userId =
-     session?.user?.id
-      ? session.user.id.toString()
-      : "6541480c6632d9ff072c5327";
+  const userId = session?.user?.id
+    ? session.user.id.toString()
+    : "6541480c6632d9ff072c5327";
 
   useEffect(() => {
-
-    isChanged && fetch("/api/watering/" + userId, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: userId,
-      }),
-    });
-
+    
     fetch("/api/garden/" + userId, { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
         setData(data.userPlants);
+      });
+
+    isChanged &&
+      fetch("/api/watering/" + userId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+        }),
       });
 
     setChanged(false);
@@ -122,7 +121,6 @@ const UserGarden = ({ isExample }: { isExample: boolean }) => {
                     onWater={handleWater}
                     plantDetails={plant.plantDetails}
                   />
-                  
                 ))}
                 <PlantCardPost />
               </div>

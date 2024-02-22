@@ -10,7 +10,9 @@ export async function fetchPlants({
   const urls = [];
 
   for (let i = 1; i <= Number(maxPage); i++) {
-    urls.push(`https://perenual.com/api/species-list?page=${i}&key=${APIKeyPlant}&q=${plantCommonName}`)
+    urls.push(
+      `https://perenual.com/api/species-list?page=${i}&key=${APIKeyPlant}&q=${plantCommonName}`
+    );
   }
 
   const result2 = await Promise.all(
@@ -21,12 +23,11 @@ export async function fetchPlants({
     })
   );
 
-
-  const dataFrame= await Promise.resolve(result2).then(() => {
+  const dataFrame = await Promise.resolve(result2).then(() => {
     return result2.flat();
   });
 
-  return dataFrame.slice(0, 28 + 28 * (Number(maxPage)-1));
+  return dataFrame.slice(0, 28 + 28 * (Number(maxPage) - 1));
 }
 
 export async function fetchDetails(plantId: number): Promise<any> {
@@ -95,6 +96,22 @@ export function getWeekNumber(d: any) {
   var weekNo = Math.ceil(((d - Number(yearStart)) / 86400000 + 1) / 7);
   // Return array of year and week number
   return weekNo;
+}
+
+export async function getGeocode(city: string) {
+  const APIGeocode = `${process.env.API_NINJAS_KEY}`;
+  const response = await fetch(
+    `https://api.api-ninjas.com/v1/geocoding?city=${city}`,
+    {
+      method: "GET",
+      headers: {
+        "X-Api-Key": APIGeocode,
+      },
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+  return data;
 }
 
 // ex: getWeekNumber(new Date())

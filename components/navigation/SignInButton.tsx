@@ -3,22 +3,37 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const SignInButton = () => {
   const { data: session } = useSession();
 
-  const [isExample, setExample] = useState(false);
+  const searchParams = useSearchParams();
+
+  const sim = searchParams.get("sim");
 
   const router = useRouter();
 
   if (session?.user) {
     return (
       <div className="flex gap-4 ml-auto max-md:hidden">
+        <button
+          onClick={() => signOut()}
+          className=" text-red-900 hover:text-red-600"
+        >
+          Sign Out
+        </button>
+        <Image
+          src={session.user.image || "/logo.svg"}
+          width={37}
+          height={37}
+          className="rounded-full"
+          alt="profile"
+        />
         <Link
           href={`/catalogue/${session?.user?.id}`}
-          className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
+          className="inline my-auto font-semibold text-green-900 hover:text-green-600"
           scroll={false}
         >
           Catalogue
@@ -31,30 +46,38 @@ const SignInButton = () => {
         >
           My Garden
         </Link>
-        <p className="text-green-600 my-auto font-semibold">
-          {session.user.name}
-        </p>
-        <Image
-          src={session.user.image || "/logo.svg"}
-          width={37}
-          height={37}
-          className="rounded-full"
-          alt="profile"
-        />
-        <button
-          onClick={() => signOut()}
-          className=" text-red-900 hover:text-red-600"
+        <Link
+          className="my-auto font-semibold"
+          href={`/profile/${session?.user?.id}`}
         >
-          Sign Out
-        </button>
+          Profile
+        </Link>
+
+        <Link
+          className="font-semibold ml-auto mr-6 my-auto hover:text-gray-400"
+          href={"/about"}
+          scroll={false}
+        >
+          About
+        </Link>
       </div>
     );
   } else {
     return (
       <div className="flex gap-4 max-md:hidden">
-        {!isExample && (
+        {!sim && (
           <>
+          
+          
             <Link
+              className="font-semibold ml-auto mr-6 my-auto hover:text-gray-400"
+              href={"/about"}
+              scroll={false}
+            >
+              About
+            </Link>
+
+            {/* <Link
               href={`/guide?sim=true`}
               className="my-auto text-white font-semibold  "
               scroll={false}
@@ -67,42 +90,35 @@ const SignInButton = () => {
               >
                 Explore
               </button>
-            </Link>
-
-            <button
-              onClick={() => signIn()}
-              className="inline custom-btn text-green-700 rounded-full bg-white min-w-[120px] hover:bg-gray-50 font-bold border shadow"
-            >
-              Sign In{" "}
-              <Image
-                height={30}
-                width={30}
-                src="/google.svg"
-                alt="google image"
-                className="ml-2"
-              />
-            </button>
+            </Link> */}
           </>
         )}
 
-        {isExample && (
+        {sim && (
           <>
             <button
               onClick={() => {
-                setExample(false);
                 router.refresh();
               }}
-              className="mr-3 inline my-auto ml-auto bg-green-800 hover:bg-green-600 px-5 rounded-full p-3"
+              className="mr-3 inline my-auto ml-auto text-green-600 hover:text-green-800 "
             >
               <Link
                 href={`/ `}
-                className="my-auto text-white font-semibold  "
+                className="my-auto font-semibold  "
                 scroll={false}
                 shallow={true}
               >
-                Exit
+                Home
               </Link>
             </button>
+            {/* <Link
+              className="font-semibold ml-auto mr-6 my-auto hover:text-gray-400"
+              href={"/map?sim=true&lat=47.478419&lng=-0.563166&category=florist&radius=500"}
+              scroll={false}
+            >
+              Map
+            </Link> */}
+
             <Link
               href={`catalogue?sim=true&nb=1`}
               className="mr-3 inline my-auto ml-auto font-semibold text-green-900 hover:text-green-600"
@@ -117,6 +133,20 @@ const SignInButton = () => {
               shallow={true}
             >
               Garden
+            </Link>
+            <Link
+              className="font-semibold ml-auto mr-6 my-auto hover:text-gray-400"
+              href={"/profile?sim=true"}
+              scroll={false}
+            >
+              Profile
+            </Link>
+            <Link
+              className="font-semibold ml-auto mr-6 my-auto hover:text-gray-400"
+              href={"/about?sim=true"}
+              scroll={false}
+            >
+              About
             </Link>
           </>
         )}

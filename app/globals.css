@@ -31,6 +31,42 @@ body {
   color: #023020;
 }
 
+
+/*
+
+Start journey button 
+
+*/
+
+.anim-bg-gradient {
+  padding: 0.6em 1.2em;
+  border-radius: 0.375em;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(120deg, #84CC16, #00B859, #009F7B);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  transition: background-position .8s;
+}
+
+.anim-bg-gradient:hover {
+  background-position: 0 0;
+}
+
+.anim-bg-gradient:focus {
+  background-position: 0 0;
+}
+
+
+
+/*
+  Inner Group for Chart Button Info 
+*/
+
+.inner-group:hover .inner-group-hover {
+  display: inline-block;
+}
+
 /* Animated Blob */
 
 .gooey-rec {

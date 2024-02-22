@@ -60,7 +60,7 @@ const SearchPlantCommonName = ({
             leaveTo="transform scale-95 opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options>
+            <Combobox.Options className="absolute z-10  max-h-60 w-[90%] left-14 overflow-auto rounded-b-2xl bg-white shadow-lg">
               {query.length > 0 && (
                 <Combobox.Option
                   value={query}

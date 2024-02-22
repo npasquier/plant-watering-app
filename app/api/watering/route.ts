@@ -1,7 +1,6 @@
 import { UserModel } from "@/models/user";
 import { mapWatering } from "@/utils";
 import connectToDB from "@/utils/database";
-
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -9,7 +8,17 @@ export async function GET() {
 
   const users = await UserModel.find({});
 
-  
+  const resetCurrentWaterActivity = () => ({
+    manualWater: false,
+    precip: 0,
+    shouldWater: false,
+  });
+
+  const today = new Date();
+  // Sunday - Saturday : 0 - 6
+  const todayISO = (today.getUTCDay() + 6) % 7;
+ 
+
   //Transfer weekly weather by user
   users.forEach((user) => {
     if (user.garden) {
@@ -34,10 +43,6 @@ export async function GET() {
           plant.currentWaterActivity[i].precip > 25 &&
             (totalWatering = totalWatering + 1);
         }
-
-        const today = new Date();
-        // Sunday - Saturday : 0 - 6
-        const todayISO = (today.getUTCDay() + 6) % 7;
 
         // Algo for Water Frequency of 1x/week: update shoudlWater by user
         if (
@@ -111,7 +116,7 @@ export async function GET() {
           for (let i = 0; i < 7; i++) {
             plant.currentWaterActivity[i].shouldWater = false;
           }
-          
+
           plant.currentWaterActivity[todayISO].shouldWater = true;
 
           const shouldWaterDay = todayISO + 3;

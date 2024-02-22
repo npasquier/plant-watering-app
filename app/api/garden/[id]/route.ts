@@ -14,14 +14,21 @@ export async function GET(request: NextRequest, { params }: any) {
   if (userId !== "undefined") {
     const user = await UserModel.findById(userId);
 
+    if (!user) {
+      return NextResponse.json(["User not found"]);
+    }
+
     const userPlants = user?.garden;
 
     const userCity = user?.city;
 
     // Reset watering levels upon fecthing on a new week
-    const weekNumber = getWeekNumber(new Date());
+    const currentDate = new Date();
+    const currentWeekNumberSinceEpoch = Math.floor(currentDate.getTime() / (1000 * 60 * 60 * 24 * 7));
 
-    if (user?.weekLog === 0 || (user?.weekLog && weekNumber > user?.weekLog)) {
+    const shouldReset = user.weekLog === undefined || currentWeekNumberSinceEpoch > user.weekLog
+
+    if (shouldReset) {
       user?.garden?.forEach((plant) => {
         plant.totalWateringLvl = 0;
         plant.currentWaterActivity.forEach((day) => (day.shouldWater = false));
@@ -29,9 +36,9 @@ export async function GET(request: NextRequest, { params }: any) {
         plant.currentWaterActivity.forEach((day) => (day.precip = -1));
       });
 
-      user.weekLog = weekNumber;
+      user.weekLog = currentWeekNumberSinceEpoch;
 
-      user.save();
+      await user.save();
 
       console.log("Reset watering levels");
     } else {

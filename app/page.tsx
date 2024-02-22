@@ -1,13 +1,17 @@
 import Hero from "@/components/index/Hero";
 import InfoGifRight from "@/components/index/InfoGifRight";
 import InfoGifLeft from "@/components/index/InfoGifLeft";
+import AnimationWatering from "@/components/lottie/AnimationWatering";
 
 export default function Home() {
   return (
     <main className="overflow-hidden ">
       <Hero />
 
+
       <div className="relative mt-3">
+
+
         <InfoGifLeft>
           <div className="flex flex-row  max-md:flex-col lg:mt-0 mt-8 relative">
             <div className="lg:w-[250px] lg:h-[350px] w-[60%] max-md:mx-auto  rounded-b-full rounded-tr-full overflow-hidden relative">
@@ -69,7 +73,8 @@ export default function Home() {
 
               <div className="lg:flex-[1.5] flex flex-col my-auto lg:ml-8 max-md:text-center">
                 <p className=" my-3 text-2xl">
-                  <strong>The weather often naturally waters</strong> your outdoor plants.
+                  <strong>The weather often naturally waters</strong> your
+                  outdoor plants.
                 </p>
 
                 <p className="my-3 mt-6 ml-4 text-lg ">

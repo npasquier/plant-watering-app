@@ -47,7 +47,7 @@ const Sidebar = ({
         >
           <li>
             <Link href="/about" onClick={toggle}>
-              <p>About Us</p>
+              <p>About</p>
             </Link>
           </li>
           {session?.user && (
